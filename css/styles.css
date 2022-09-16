@@ -1,0 +1,145 @@
+/* 
+========================================================================================================= 
+======================================          CSS RESET          ====================================== 
+=========================================================================================================
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+    color: inherit;
+    text-decoration: inherit;
+    font-weight: inherit;
+}
+
+
+/* 
+============================================================================================================ 
+======================================          INICIO LOGIN          ====================================== 
+============================================================================================================
+*/
+
+.loginContainer {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5rem;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    width: 50vw;
+    height: 50vh;
+    background-color: #D9D9D9;
+    position: relative;
+    padding: 5%;
+}
+
+.loginContainer_solapa {
+    position: absolute;
+    height: 2rem;
+    width: 8rem;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    top: -1.5rem;
+    background-color: #D9D9D9;
+    user-select: none;
+    cursor: pointer;
+}
+
+#solapaSocio {
+    left: 0;
+}
+
+#solapaComercio {
+    left: 8rem;
+}
+
+.noActive {
+    background-color: #E9E9E9;
+    color: #888888;
+    height: 1.5rem;
+}
+
+.active {
+    background-color: #D9D9D9;
+}
+
+.loginContainer_formularioContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.loginContainer_formularioContainer_buttons {
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+}
+
+.loginContainer_formularioContainer_submit {
+    width: 25%;
+}
+
+.loginContainer_formularioContainer_clear {
+    width: 25%;
+}
+
+.admin_section {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #b99b06;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
+
+.admin_logo {
+    font-size: xx-large;
+}
+
+.admin_section span {
+    font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .loginContainer {
+        width: 100%;
+        height: 100vh;
+    }
+    .loginContainer_formularioContainer {
+        height: 100%;
+    }
+    .loginContainer_formularioContainer {
+        justify-content: start;
+        gap: 10%;
+        margin-top: 2rem;
+    }
+    .admin_section {
+        top: 15px;
+        left: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .loginContainer_formularioContainer_submit {
+        width: 50%;
+    }
+    .loginContainer_formularioContainer_clear {
+        width: 50%;
+    }
+    .loginContainer_formularioContainer {
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+}
