@@ -16,12 +16,12 @@
     <h1 class="display-4 text-center mt-4 mb-4">Bienvenido a Fidelty!</h1>
     <div class="loginContainer">
         <!-- Solapas -->
-        <div id="solapaSocio" class="loginContainer_solapa noActive">Socio</div>
-        <div id="solapaComercio" class="loginContainer_solapa active">Comercio</div>
+        <div id="solapaSocio" class="loginContainer_solapa noActive"><a href="./login_socio.html">Socio</a></div>
+        <div id="solapaComercio" class="loginContainer_solapa active"><a href="#">Comercio</a></div>
 
         <!-- Container -->
         <form class="loginContainer_formularioContainer" method="post" action="php/login.php">
-            <input type="text" name="username" class="form-control" placeholder="Username">
+            <input type="text" name="cuit" class="form-control" placeholder="Cuit">
             <input type="password" name="password" class="form-control" placeholder="Password">
 
             <div class="loginContainer_formularioContainer_buttons">
@@ -32,7 +32,7 @@
         <div class="admin_section">
             <a href="#">
                 <i class="fa-solid fa-key admin_logo"></i>
-                <span>ADMIN</span>
+                <a href="./login_admin.html">ADMIN</a>
             </a>
         </div>
 
@@ -44,7 +44,6 @@
     <!-- BOOTSTRAP -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <!-- JS -->
-    <script src="js/login.js"></script>
 </body>
 
 </html>
