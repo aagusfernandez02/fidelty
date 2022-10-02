@@ -14,9 +14,10 @@
         $respuesta=mysqli_fetch_array($consulta);
 	    $_SESSION['nombre']=$respuesta['nombre'];
 	    $_SESSION['saldo']=$respuesta['saldo'];
+        $_SESSION['estado']='SOCIO_LOGGED';
         header("Location:../index.php");
     } else {
-        $_SESSION['nombre'] = "ERROR";
+        $_SESSION['estado'] = "SOCIO_ERROR";
         header("Location:../login_socio.php");
     }
 

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles_login_register.css">
     <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <!-- TOASTS -->
@@ -67,8 +67,8 @@
     
     <!-- JS -->
     <?php 
-        if( isset( $_SESSION['estado_registro'] ) && $_SESSION['estado_registro']=="ERROR" ) {
-            $_SESSION['estado_registro'] = null;
+        if( isset( $_SESSION['estado'] ) && $_SESSION['estado']=="REGISTRO_ERROR" ) {
+            $_SESSION['estado'] = null;
             echo "<script>toastr.error('Usuario ya registrado','ERROR')</script>";
         }
     ?>

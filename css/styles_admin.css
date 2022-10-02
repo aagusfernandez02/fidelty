@@ -1,0 +1,180 @@
+/* 
+========================================================================================================= 
+======================================          CSS RESET          ====================================== 
+=========================================================================================================
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+    color: inherit;
+    text-decoration: inherit;
+    font-weight: inherit;
+}
+
+
+/* 
+========================================================================================================= 
+======================================            ADMIN            ====================================== 
+=========================================================================================================
+*/
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+header {
+    width: 100%;
+    height: 5rem;
+    background-color: #ffb9b9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+header h2 {
+    font-style: italic;
+}
+
+header i {
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.main_admin {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.imagen-admin {
+    width: 35vw;
+    object-fit: contain;
+}
+
+footer {
+    width: 100%;
+    height: 3rem;
+    background-color: #bb7979;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.footer_derechos {
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+.footer_redes {
+    font-size: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.go_back {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 1rem;
+    position: fixed;
+    top: 5rem;
+    right: 1rem;
+    font-size: 2rem;
+}
+
+.go_back i:hover+#go_back_tooltip {
+    transform: scaleX(1);
+    transition: .25s;
+}
+
+#go_back_tooltip {
+    opacity: .6;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: .25s;
+}
+
+
+/* 
+============================================================================================================ 
+=================================          REGISTER/DELETE COMERCIO         ================================
+============================================================================================================
+*/
+
+.main_register_comercio {
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    align-items: center;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    margin-top: 2rem;
+}
+
+.imagen_aux {
+    width: 30vw;
+}
+
+.regiter_comercio_form {
+    width: 70%;
+}
+
+.loginContainer_formularioContainer_buttons {
+    display: flex;
+    justify-content: end;
+    gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .imagen_aux {
+        display: none;
+    }
+    .admin-options-container li {
+        margin-top: 2rem;
+    }
+    footer {
+        height: auto;
+        flex-direction: column;
+    }
+    .footer_derechos {
+        font-size: 1rem;
+    }
+    .regiter_comercio_form {
+        width: 100%;
+    }
+    .loginContainer_formularioContainer_buttons {
+        justify-content: center;
+    }
+    #go_back_tooltip {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .main_register_comercio {
+        padding: 1rem;
+    }
+}

@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php 
+session_start(); 
+if( isset($_SESSION['estado']) && $_SESSION['estado'] == 'SOCIO_LOGGED' ){
+    header("Location:../fidelty/index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +16,7 @@
     <!-- TOASTS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles_login_register.css">
     <title>Login</title>
 </head>
 
@@ -29,14 +34,14 @@
             <span class="login_registerSeccion">¿No formas parte de Fidelty? <a href="./register_socio.php">Registrate acá</a></span>
 
             <div class="loginContainer_formularioContainer_buttons">
-                <button type="reset" class="btn btn-danger loginContainer_formularioContainer_clear">Limpiar</button>
-                <button type="submit" class="btn btn-success loginContainer_formularioContainer_submit">Iniciar Sesión</button>
+                <button type="reset" class="btn btn-danger loginContainer_formularioContainer_clear">LIMPIAR</button>
+                <button type="submit" class="btn btn-success loginContainer_formularioContainer_submit">INICIAR SESIÓN</button>
             </div>
         </form>
         <div class="admin_section">
             <a href="#">
                 <i class="fa-solid fa-key admin_logo"></i>
-                <a href="./login_admin.html">ADMIN</a>
+                <a href="./login_admin.php">ADMIN</a>
             </a>
         </div>
 
@@ -53,12 +58,12 @@
     
     <!-- JS -->
     <?php 
-        if( isset( $_SESSION['estado_registro'] ) && $_SESSION['estado_registro']=="OK" ) {
-            $_SESSION['estado_registro'] = null;
+        if( isset( $_SESSION['estado'] ) && $_SESSION['estado']=="REGISTRO_OK" ) {
+            $_SESSION['estado'] = null;
             echo "<script>toastr.success('Usuario registrado correctamente')</script>";
         }
-        if( isset( $_SESSION['nombre'] ) && $_SESSION['nombre']=="ERROR" ) {
-            $_SESSION['nombre'] = null;
+        if( isset( $_SESSION['estado'] ) && $_SESSION['estado']=="SOCIO_ERROR" ) {
+            $_SESSION['estado'] = null;
             echo "<script>toastr.error('Credenciales incorrectas','ERROR')</script>";
         }
     ?>
