@@ -32,7 +32,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
     </a>
     <main class="main_register_comercio">
         <img src="./img/comercio.png" alt="imagen representativa de un comercio" class="imagen_aux">
-        <form class="regiter_comercio_form" method="post" action="./php/registerComercio.php">
+        <form class="regiter_comercio_form" method="post" action="./php/registerPremio.php">
             <h1 class="display-5 mb-3">CREAR PREMIO</h1>
             <div class="row mb-3">
                 <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
@@ -59,14 +59,26 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
                 </div>
             </div>
             <!-- INPUTS OPCIONALES -->
-            <div>
-                <input type="checkbox" id="ingreso_con_stock" name="ingreso_con_stock">
-                <label for="ingreso_con_stock">¿Ingreso con stock?</label>
+            <div class="inputs_opcionales_control mb-3">
+                <div>
+                    <input type="checkbox" id="ingreso_con_stock" name="ingreso_con_stock">
+                    <label for="ingreso_con_stock">¿Ingreso con stock?</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="ingreso_con_punto_reposicion" name="ingreso_con_punto_reposicion">
+                    <label for="ingreso_con_punto_reposicion">¿Ingreso con punto de reposición?</label>
+                </div>
             </div>
             <div class="row mb-3">
                 <label for="stock" class="col-sm-2 col-form-label">Stock</label>
                 <div class="col-sm-10">
                     <input id="input_stock" type="number" class="form-control" name="stock" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="punto_reposicion" class="col-sm-2 col-form-label">Pto. repos.</label>
+                <div class="col-sm-10">
+                    <input id="input_punto_reposicion" type="number" class="form-control" name="punto_reposicion" disabled>
                 </div>
             </div>
             <div class="loginContainer_formularioContainer_buttons">
@@ -94,29 +106,17 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
     <!-- TOASTS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- JS -->
-    <script>
-        let input_Stock = document.getElementById('input_stock');
-        let checkBox_ingresoConStock = document.getElementById('ingreso_con_stock');
-        checkBox_ingresoConStock.addEventListener('click',()=>{
-            if(checkBox_ingresoConStock.checked){
-                input_Stock.removeAttribute('disabled');
-                input_Stock.setAttribute('required',true);
-            } else{
-                input_Stock.setAttribute('disabled',true);
-                input_Stock.removeAttribute('required');
-            }
-        });
-    </script>
     <?php
-    if (isset($_SESSION['estado_registro']) && $_SESSION['estado_registro'] == "REGISTRO_COMERCIO_OK") {
+    if (isset($_SESSION['estado_registro']) && $_SESSION['estado_registro'] == "REGISTRO_PREMIO_OK") {
         $_SESSION['estado_registro'] = null;
-        echo "<script>toastr.success('Comercio registrado correctamente')</script>";
+        echo "<script>toastr.success('Premio registrado correctamente')</script>";
     }
-    if (isset($_SESSION['estado_registro']) && $_SESSION['estado_registro'] == "REGISTRO_COMERCIO_ERROR") {
+    if (isset($_SESSION['estado_registro']) && $_SESSION['estado_registro'] == "REGISTRO_PREMIO_ERROR") {
         $_SESSION['estado_registro'] = null;
-        echo "<script>toastr.error('Comercio con ese cuit ya registrado','ERROR')</script>";
+        echo "<script>toastr.error('Error en la creación del premio','ERROR')</script>";
     }
     ?>
+    <script src="./js/control_checkbox_inputs_opcionales.js"></script>
 </body>
 
 </html>
