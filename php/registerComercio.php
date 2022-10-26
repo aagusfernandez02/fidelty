@@ -7,7 +7,7 @@
     $email = $_POST['email'];
     $password = md5($_POST['password']);
 
-    include("./conexion.php");
+    include("conexion.php");
     
     $consulta=mysqli_query($conexion, "SELECT * FROM comercios WHERE cuit = '$cuit';");
     $resultado=mysqli_num_rows($consulta);

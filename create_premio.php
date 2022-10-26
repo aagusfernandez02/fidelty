@@ -2,7 +2,7 @@
 
 session_start();
 if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
-    header("Location:../login_admin.php");
+    header("Location: login_admin.php");
 }
 
 ?>
@@ -19,12 +19,12 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
     <!-- TOASTS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="./css/styles_admin.css">
+    <link rel="stylesheet" href="css/styles_admin.css">
 </head>
 
 <body>
     <header>
-        <h2 class="display-5 text-center">Fidelty</h2>
+        <h2 class="display-5 text-center"><a href="index_admin.php">Fidelty</a></h2>
         <a href="./php/funciones.php?session_destroy=true"><i class="fa-solid fa-right-from-bracket"></i></a>
     </header>
     <a class="go_back" href="./index_admin.php">
@@ -32,7 +32,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
     </a>
     <main class="main_register_comercio">
         <img src="./img/canje.png" alt="imagen representativa de un canje" class="imagen_aux">
-        <form class="regiter_comercio_form" method="post" action="./php/registerPremio.php">
+        <form class="regiter_comercio_form" method="post" action="php/registerPremio.php">
             <h1 class="display-5 mb-3">CREAR PREMIO</h1>
             <div class="row mb-3">
                 <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>

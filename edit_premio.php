@@ -5,6 +5,15 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
     header("Location:../login_admin.php");
 }
 
+if( isset($_GET['id-premio']) and $_GET['id-premio']!="" ){
+    include('php/conexion.php');
+    $consulta_premio_editar = mysqli_query($conexion, "SELECT * FROM premios WHERE id=".$_GET['id-premio']);
+    $resultado_premio_editar = mysqli_num_rows($consulta_premio_editar);
+    if($resultado_premio_editar > 0){
+        $premio_editar = mysqli_fetch_assoc($consulta_premio_editar);
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,12 +28,12 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
     <!-- TOASTS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="./css/styles_admin.css">
+    <link rel="stylesheet" href="css/styles_admin.css">
 </head>
 
 <body>
     <header>
-        <h2 class="display-5 text-center">Fidelty</h2>
+        <h2 class="display-5 text-center"><a href="index_admin.php">Fidelty</a></h2>
         <a href="./php/funciones.php?session_destroy=true"><i class="fa-solid fa-right-from-bracket"></i></a>
     </header>
     <a class="go_back" href="./index_admin.php">
@@ -32,17 +41,25 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
     </a>
     <main class="main_register_comercio">
         <img src="./img/canje.png" alt="imagen representativa de un canje" class="imagen_aux">
-        <form class="regiter_comercio_form" method="post" action="./php/editPremio.php">
+        <form class="regiter_comercio_form" method="post" action="php/editPremio.php">
             <h1 class="display-5 mb-3">EDITAR PREMIO</h1>
             <div class="row mb-3">
                 <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                 <select class="form-select" aria-label="Default select example" name="nombre" id='dropdown_premios'>
                 <?php 
-                    include("./php/conexion.php");
+                    include("php/conexion.php");
                     $result = mysqli_query($conexion, "SELECT premios.nombre, premios.id FROM premios");
                     while ($row = mysqli_fetch_assoc($result))
                     {
-                        echo "<option value=".$row['id'].">".$row['nombre']."</option>";
+                        if( isset($_GET['id-premio']) and $_GET['id-premio']!="" ){
+                            if($_GET['id-premio'] == $row['id']) {
+                                echo "<option value=".$row['id']." selected>".$row['nombre']."</option>";
+                            } else {
+                                echo "<option value=".$row['id'].">".$row['nombre']."</option>";
+                            }
+                        } else {
+                            echo "<option value=".$row['id'].">".$row['nombre']."</option>";
+                        }
                     }
                 ?>    
                 </select>
@@ -50,31 +67,56 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
             <div class="row mb-3">
                 <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
                 <div class="col-sm-10">
-                    <textarea type="text" class="form-control" name="descripcion" style="resize: none"></textarea>
+                    <?php 
+                    if( isset($_GET['id-premio']) and $_GET['id-premio']!="")
+                        echo "<textarea type='text' class='form-control' name='descripcion' style='resize: none'>".$premio_editar['descripcion']."</textarea>";
+                    else 
+                        echo "<textarea type='text' class='form-control' name='descripcion' style='resize: none'></textarea>";
+                    ?>
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="saldo" class="col-sm-2 col-form-label">Saldo</label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" name="saldo">
+                    <?php 
+                    if( isset($_GET['id-premio']) and $_GET['id-premio']!="")
+                        echo '<input type="number" class="form-control" name="saldo" value="'.$premio_editar['saldo'].'">';
+                    else 
+                        echo '<input type="number" class="form-control" name="saldo">';
+                    ?>
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="img" class="col-sm-2 col-form-label">Imagen</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="img">
+                    <?php 
+                    if( isset($_GET['id-premio']) and $_GET['id-premio']!="")
+                        echo '<input type="text" class="form-control" name="img" value="'.$premio_editar['img'].'">';
+                    else 
+                        echo '<input type="text" class="form-control" name="img">';
+                    ?>
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="stock" class="col-sm-2 col-form-label">Stock</label>
                 <div class="col-sm-10">
-                    <input id="input_stock" type="number" class="form-control" name="stock" >
+                    <?php 
+                    if( isset($_GET['id-premio']) and $_GET['id-premio']!="")
+                        echo '<input id="input_stock" type="number" class="form-control" name="stock" value='.$premio_editar['stock'].'>';
+                    else 
+                        echo '<input id="input_stock" type="number" class="form-control" name="stock" >';
+                    ?>
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="punto_reposicion" class="col-sm-2 col-form-label">Pto. repos.</label>
                 <div class="col-sm-10">
-                    <input id="input_punto_reposicion" type="number" class="form-control" name="punto_reposicion">
+                    <?php 
+                    if( isset($_GET['id-premio']) and $_GET['id-premio']!="")
+                        echo '<input id="input_punto_reposicion" type="number" class="form-control" name="punto_reposicion" value="'.$premio_editar['punto_reposicion'].'">';
+                    else 
+                        echo '<input id="input_punto_reposicion" type="number" class="form-control" name="punto_reposicion">';
+                    ?>
                 </div>
             </div>
             <div class="loginContainer_formularioContainer_buttons">

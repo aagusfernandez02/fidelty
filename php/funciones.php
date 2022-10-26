@@ -19,7 +19,7 @@ if (isset($_GET['paginacion']) && $_GET['paginacion'] == 'prev') {
 
 if (isset($_GET['premio']) && $_GET['premio'] != '') {
     $id_premio = $_GET['premio'];
-    include('./conexion.php');
+    include('conexion.php');
     $consulta = mysqli_query($conexion, "SELECT * FROM premios WHERE id='$id_premio';");
     $resultado = mysqli_num_rows($consulta);
     if($resultado > 0){

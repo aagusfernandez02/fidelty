@@ -27,13 +27,13 @@
     <div class="loginContainer">
         <!-- Solapas -->
         <div id="solapaSocio" class="loginContainer_solapa active"><a href="#">Socio</a></div>
-        <div id="solapaComercio" class="loginContainer_solapa noActive"><a href="./login_comercio.html">Comercio</a></div>
+        <div id="solapaComercio" class="loginContainer_solapa noActive"><a href="login_comercio.html">Comercio</a></div>
 
         <!-- Container -->
         <form class="loginContainer_formularioContainer" method="post" action="php/loginSocio.php">
             <input type="text" name="dni" class="form-control" placeholder="Dni" required>
             <input type="password" name="password" class="form-control" placeholder="Password" required>
-            <span class="login_registerSeccion">¿No formas parte de Fidelty? <a href="./register_socio.php">Registrate acá</a></span>
+            <span class="login_registerSeccion">¿No formas parte de Fidelty? <a href="register_socio.php">Registrate acá</a></span>
 
             <div class="loginContainer_formularioContainer_buttons">
                 <button type="reset" class="btn btn-danger loginContainer_formularioContainer_clear">LIMPIAR</button>
@@ -43,7 +43,7 @@
         <div class="admin_section">
             <a href="#">
                 <i class="fa-solid fa-key admin_logo"></i>
-                <a href="./login_admin.php">ADMIN</a>
+                <a href="login_admin.php">ADMIN</a>
             </a>
         </div>
 

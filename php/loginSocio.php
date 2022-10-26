@@ -4,7 +4,7 @@
     $dni = $_POST['dni'];
     $password = md5($_POST['password']);
 
-    include("./conexion.php");
+    include("conexion.php");
     
     $consulta=mysqli_query($conexion, " SELECT * FROM socios WHERE dni = '$dni' AND password='$password';");
     $resultado=mysqli_num_rows($consulta);

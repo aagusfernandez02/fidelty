@@ -23,7 +23,7 @@
         <div id="solapaComercio" class="loginContainer_solapa noActive"><a href="./login_comercio.html">Comercio</a></div>
 
         <!-- Container -->
-        <form class="registerContainer_formularioContainer" method="post" action="./php/register.php">
+        <form class="registerContainer_formularioContainer" method="post" action="php/register.php">
             <div class="input-group input-group-sm mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-sm">Nombre</span>
                 <input required type="text" class="form-control" name="nombre">
@@ -48,7 +48,7 @@
                 <span class="input-group-text" id="inputGroup-sizing-sm">Contraseña</span>
                 <input required type="password" class="form-control" name="password">
             </div>
-            <span class="login_registerSeccion">¿Ya sos parte de Fidelty? <a href="./login_socio.php">Inicia sesión</a></span>
+            <span class="login_registerSeccion">¿Ya sos parte de Fidelty? <a href="login_socio.php">Inicia sesión</a></span>
             <div class="loginContainer_formularioContainer_buttons">
                 <button type="reset" class="btn btn-danger loginContainer_formularioContainer_clear">Limpiar</button>
                 <button type="submit" class="btn btn-success loginContainer_formularioContainer_submit">Registrarse</button>

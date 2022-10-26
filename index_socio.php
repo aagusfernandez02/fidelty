@@ -1,9 +1,9 @@
 <?php
 session_start();
 if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'SOCIO') {
-    header("Location: ./index.php");
+    header("Location: index.php");
 } else {
-    include("./php/conexion.php");
+    include("php/conexion.php");
     // Actualizar saldo
     // AGREGAR VARIABLE QUE CHEQUEE SI DEBE HACERLO (cuando se hizo un canje)
     if (isset($_SESSION['actualizar_estado']) && $_SESSION['actualizar_estado'] == true) {
@@ -32,20 +32,20 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'SOCIO') {
     <!-- TOASTS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="./css/styles_socio.css">
+    <link rel="stylesheet" href="css/styles_socio.css">
 </head>
 
 <body>
     <header>
-        <h2 class="display-5 text-center">Fidelty</h2>
+        <h2 class="display-5 text-center"><a href="index_socio.php">Fidelty</a></h2>
         <div class="saludo">
-            <h5>Hola Agustin</h5>
+            <h5>Hola <?php echo $_SESSION['nombre']?></h5>
             <span class="saludo_puntos">Tenes <strong><?php echo $_SESSION['saldo'] ?></strong> puntos</span>
         </div>
-        <a href="./php/funciones.php?session_destroy=true"><i class="fa-solid fa-right-from-bracket"></i></a>
+        <a href="php/funciones.php?session_destroy=true"><i class="fa-solid fa-right-from-bracket"></i></a>
     </header>
     <main class="main_socio">
-        <form class="searchbar_container" method="get" action="./index_socio.php">
+        <form class="searchbar_container" method="get" action="index_socio.php">
             <div class="searchbar">
                 <input name="premio" type="text" class="form-control" placeholder="Premio" value="<?php if(isset($_GET['premio'])){echo $_GET['premio'];}else{echo "";}?>">
                 <button type="submit" class="btn btn-light"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -66,7 +66,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'SOCIO') {
                     $disabled = '';
                     if($row['saldo']>$_SESSION['saldo']) $disabled='disabled';
                     echo '
-                    <form class="card" style="width: 18rem;" action="./php/funciones.php" method="get" >
+                    <form class="card" style="width: 18rem;" action="php/funciones.php" method="get" >
                         <input name="premio" value='.$row['id'],' style="display:none;">
                         <img src="'.$row['img'].'" class="card-img-top" alt="'.$row['nombre'].'">
                         <div class="card-body">
@@ -84,9 +84,9 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'SOCIO') {
         </div>
         
         <div class="controles-paginacion">
-            <a href="./php/funciones.php?paginacion=prev"><i class="fa-solid fa-angle-left"></i></a>
+            <a href="php/funciones.php?paginacion=prev"><i class="fa-solid fa-angle-left"></i></a>
             <?php echo "Pagina ".$_SESSION['pagina'].' de '.$_SESSION['cantidad paginas']?>
-            <a href="./php/funciones.php?paginacion=next"><i class="fa-solid fa-angle-right"></i></a>
+            <a href="php/funciones.php?paginacion=next"><i class="fa-solid fa-angle-right"></i></a>
         </div>
     </main>
 

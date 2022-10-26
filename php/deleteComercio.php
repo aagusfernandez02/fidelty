@@ -4,7 +4,7 @@
 
     $cuit = $_POST['cuit'];
 
-    include("./conexion.php");
+    include("conexion.php");
     
     $consulta=mysqli_query($conexion, "SELECT * FROM `comercios` WHERE `cuit`='$cuit'");
     $resultado=mysqli_num_rows($consulta);

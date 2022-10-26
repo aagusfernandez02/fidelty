@@ -4,7 +4,7 @@
 
     $id = $_POST['nombre']; // Recibe el ID
 
-    include("./conexion.php");
+    include("conexion.php");
     
     $consulta=mysqli_query($conexion, "SELECT * FROM premios WHERE id='$id'");
     $resultado=mysqli_num_rows($consulta);

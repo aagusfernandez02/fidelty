@@ -17,16 +17,16 @@ if( !isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN' ){
     <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <!-- CSS -->
-    <link rel="stylesheet" href="./css/styles_admin.css">
+    <link rel="stylesheet" href="css/styles_admin.css">
 </head>
 
 <body>
     <header>
-        <h2 class="display-5 text-center">Fidelty</h2>
-        <a href="./php/funciones.php?session_destroy=true"><i class="fa-solid fa-right-from-bracket"></i></a>
+        <h2 class="display-5 text-center"><a href="index_admin.php">Fidelty</a></h2>
+        <a href="php/funciones.php?session_destroy=true"><i class="fa-solid fa-right-from-bracket"></i></a>
     </header>
     <main class="main_admin">
-        <img class="imagen_aux" src="./img/admin.png" alt="Imagen representativa de un administrador">
+        <img class="imagen_aux" src="img/admin.png" alt="Imagen representativa de un administrador">
         <div class="admin-options-container">
             <h1 class="display-6 text-center">OPCIONES DE ADMINISTRADOR</h1>
             <ul>

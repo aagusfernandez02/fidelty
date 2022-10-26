@@ -1,9 +1,9 @@
 <?php 
     session_start(); 
     if( isset($_SESSION['estado']) && $_SESSION['estado'] == 'ADMIN' ){
-        header("Location:../fidelty/index_admin.php");
+        header("Location: index_admin.php");
     } else if( isset($_SESSION['estado']) && $_SESSION['estado'] == 'SOCIO' ){
-        header("Location:../fidelty/index_socio.php");
+        header("Location: index_socio.php");
     }
 ?>
 <!DOCTYPE html>
@@ -39,12 +39,6 @@
                 <button type="submit" class="btn btn-success loginContainer_formularioContainer_submit">INICIAR SESIÓN</button>
             </div>
         </form>
-        <div class="admin_section">
-            <a href="#">
-                <i class="fa-solid fa-key admin_logo"></i>
-                <a href="#">ADMIN</a>
-            </a>
-        </div>
 
         <!-- <img src="https://cdn-icons-png.flaticon.com/512/2317/2317407.png" alt="imagen candado acceso" class="form_image"> -->
     </div>
