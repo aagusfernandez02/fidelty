@@ -1,8 +1,10 @@
 <?php 
-session_start(); 
-if( isset($_SESSION['estado']) && $_SESSION['estado'] == 'SOCIO_LOGGED' ){
-    header("Location:../fidelty/index.php");
-}
+    session_start(); 
+    if( isset($_SESSION['estado']) && $_SESSION['estado'] == 'SOCIO' ){
+        header("Location:../fidelty/index_socio.php");
+    } else if( isset($_SESSION['estado']) && $_SESSION['estado'] == 'ADMIN' ){
+        header("Location:../fidelty/index_admin.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,8 +31,8 @@ if( isset($_SESSION['estado']) && $_SESSION['estado'] == 'SOCIO_LOGGED' ){
 
         <!-- Container -->
         <form class="loginContainer_formularioContainer" method="post" action="php/loginSocio.php">
-            <input type="text" name="dni" class="form-control" placeholder="Dni">
-            <input type="password" name="password" class="form-control" placeholder="Password">
+            <input type="text" name="dni" class="form-control" placeholder="Dni" required>
+            <input type="password" name="password" class="form-control" placeholder="Password" required>
             <span class="login_registerSeccion">¿No formas parte de Fidelty? <a href="./register_socio.php">Registrate acá</a></span>
 
             <div class="loginContainer_formularioContainer_buttons">

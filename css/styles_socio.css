@@ -57,18 +57,12 @@ header i {
     cursor: pointer;
 }
 
-.main_admin {
-    margin-top: 2rem;
+.saludo {
     display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-.imagen-admin {
-    width: 35vw;
-    object-fit: contain;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 footer {
@@ -128,45 +122,47 @@ footer {
     font-size: 1rem;
 }
 
+.main_socio {
+    padding-top: 1rem;
+}
 
-/* 
-============================================================================================================ 
-=================================          REGISTER/DELETE COMERCIO         ================================
-============================================================================================================
-*/
+.searchbar_container {
+    width: 20rem;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-.main_register_comercio {
+.searchbar {
+    position: relative;
+}
+
+.searchbar button {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.container_premios {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    gap: 5rem;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: 5rem;
-    padding-left: 5rem;
-    padding-right: 5rem;
-    margin-top: 2rem;
+    flex-wrap: wrap;
 }
 
-.imagen_aux {
-    width: 30vw;
-    align-self: center;
-}
-
-.regiter_comercio_form {
-    width: 70%;
-}
-
-.loginContainer_formularioContainer_buttons {
+.controles-paginacion {
     display: flex;
-    justify-content: end;
-    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 @media (max-width: 768px) {
-    .imagen_aux {
-        display: none;
-    }
-    .admin-options-container li {
-        margin-top: 2rem;
-    }
     footer {
         height: auto;
         flex-direction: column;
@@ -174,19 +170,9 @@ footer {
     .footer_derechos {
         font-size: 1rem;
     }
-    .regiter_comercio_form {
-        width: 100%;
-    }
-    .loginContainer_formularioContainer_buttons {
-        justify-content: center;
-    }
     #go_back_tooltip {
         display: none;
     }
 }
 
-@media (max-width: 480px) {
-    .main_register_comercio {
-        padding: 1rem;
-    }
-}
+@media (max-width: 480px) {}

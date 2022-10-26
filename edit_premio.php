@@ -13,7 +13,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Crear premio</title>
+    <title>Admin - Editar premio</title>
     <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <!-- TOASTS -->
@@ -32,62 +32,58 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
     </a>
     <main class="main_register_comercio">
         <img src="./img/canje.png" alt="imagen representativa de un canje" class="imagen_aux">
-        <form class="regiter_comercio_form" method="post" action="./php/registerPremio.php">
-            <h1 class="display-5 mb-3">CREAR PREMIO</h1>
+        <form class="regiter_comercio_form" method="post" action="./php/editPremio.php">
+            <h1 class="display-5 mb-3">EDITAR PREMIO</h1>
             <div class="row mb-3">
                 <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="nombre" required>
-                </div>
+                <select class="form-select" aria-label="Default select example" name="nombre" id='dropdown_premios'>
+                <?php 
+                    include("./php/conexion.php");
+                    $result = mysqli_query($conexion, "SELECT premios.nombre, premios.id FROM premios");
+                    while ($row = mysqli_fetch_assoc($result))
+                    {
+                        echo "<option value=".$row['id'].">".$row['nombre']."</option>";
+                    }
+                ?>    
+                </select>
             </div>
             <div class="row mb-3">
                 <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
                 <div class="col-sm-10">
-                    <textarea type="text" class="form-control" name="descripcion" required style="resize: none"></textarea>
+                    <textarea type="text" class="form-control" name="descripcion" style="resize: none"></textarea>
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="saldo" class="col-sm-2 col-form-label">Saldo</label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" name="saldo" required>
+                    <input type="number" class="form-control" name="saldo">
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="img" class="col-sm-2 col-form-label">Imagen</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="img" placeholder="https://urlImagen.com/" required>
-                </div>
-            </div>
-            <!-- INPUTS OPCIONALES -->
-            <div class="inputs_opcionales_control mb-3">
-                <div>
-                    <input type="checkbox" id="ingreso_con_stock" name="ingreso_con_stock">
-                    <label for="ingreso_con_stock">¿Ingreso con stock?</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="ingreso_con_punto_reposicion" name="ingreso_con_punto_reposicion">
-                    <label for="ingreso_con_punto_reposicion">¿Ingreso con punto de reposición?</label>
+                    <input type="text" class="form-control" name="img">
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="stock" class="col-sm-2 col-form-label">Stock</label>
                 <div class="col-sm-10">
-                    <input id="input_stock" type="number" class="form-control" name="stock" disabled>
+                    <input id="input_stock" type="number" class="form-control" name="stock" >
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="punto_reposicion" class="col-sm-2 col-form-label">Pto. repos.</label>
                 <div class="col-sm-10">
-                    <input id="input_punto_reposicion" type="number" class="form-control" name="punto_reposicion" disabled>
+                    <input id="input_punto_reposicion" type="number" class="form-control" name="punto_reposicion">
                 </div>
             </div>
             <div class="loginContainer_formularioContainer_buttons">
                 <button type="reset" class="btn btn-danger">LIMPIAR</button>
-                <button type="submit" class="btn btn-success">REGISTRAR</button>
+                <button type="submit" class="btn btn-success">EDITAR</button>
             </div>
         </form>
     </main>
-
+    
     <footer>
         <p class="footer_derechos">©Derechos reservados Agustín Fernandez 2022-2023</p>
         <div class="footer_redes">
@@ -107,16 +103,15 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- JS -->
     <?php
-    if (isset($_SESSION['estado_registro']) && $_SESSION['estado_registro'] == "REGISTRO_PREMIO_OK") {
-        $_SESSION['estado_registro'] = null;
-        echo "<script>toastr.success('Premio registrado correctamente')</script>";
+    if (isset($_SESSION['estado_update']) && $_SESSION['estado_update'] == "UPDATE_PREMIO_OK") {
+        $_SESSION['estado_update'] = null;
+        echo "<script>toastr.success('Premio actualizado correctamente')</script>";
     }
-    if (isset($_SESSION['estado_registro']) && $_SESSION['estado_registro'] == "REGISTRO_PREMIO_ERROR") {
-        $_SESSION['estado_registro'] = null;
-        echo "<script>toastr.error('Error en la creación del premio','ERROR')</script>";
+    if (isset($_SESSION['estado_update']) && $_SESSION['estado_update'] == "UPDATE_PREMIO_ERROR") {
+        $_SESSION['estado_update'] = null;
+        echo "<script>toastr.error('Error en la actualización del premio','ERROR')</script>";
     }
     ?>
-    <script src="./js/control_checkbox_inputs_opcionales.js"></script>
 </body>
 
 </html>

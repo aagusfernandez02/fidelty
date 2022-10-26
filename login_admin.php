@@ -1,4 +1,11 @@
-<?php session_start(); ?>
+<?php 
+    session_start(); 
+    if( isset($_SESSION['estado']) && $_SESSION['estado'] == 'ADMIN' ){
+        header("Location:../fidelty/index_admin.php");
+    } else if( isset($_SESSION['estado']) && $_SESSION['estado'] == 'SOCIO' ){
+        header("Location:../fidelty/index_socio.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,8 +31,8 @@
 
         <!-- Container -->
         <form class="loginContainer_formularioContainer" method="post" action="php/loginAdmin.php">
-            <input type="text" name="username" class="form-control" placeholder="Username">
-            <input type="password" name="password" class="form-control" placeholder="Password">
+            <input type="text" name="username" class="form-control" placeholder="Username" required>
+            <input type="password" name="password" class="form-control" placeholder="Password" required>
 
             <div class="loginContainer_formularioContainer_buttons">
                 <button type="reset" class="btn btn-danger loginContainer_formularioContainer_clear">LIMPIAR</button>

@@ -33,8 +33,8 @@ if( !isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN' ){
                 <li><a href="./register_comercio.php" class="lead">Registrar comercio</a></li>
                 <li><a href="./delete_comercio.php" class="lead">Dar de baja comercio</a></li>
                 <li><a href="./create_premio.php" class="lead">Crear premio</a></li>
-                <li><a href="#" class="lead">Editar premio</a></li>
-                <li><a href="#" class="lead">Eliminar premio</a></li>
+                <li><a href="./edit_premio.php" class="lead">Editar premio</a></li>
+                <li><a href="./delete_premio.php" class="lead">Eliminar premio</a></li>
             </ul>
         </div>
     </main>

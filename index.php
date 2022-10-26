@@ -6,8 +6,8 @@ session_start();
 if( isset($_SESSION['estado']) ){
     $estado = $_SESSION['estado'];
     switch($estado){
-        case 'SOCIO_LOGGED':
-            echo "<h1>SOCIO LOGGEADO</h1>";
+        case 'SOCIO':
+            header("Location:../fidelty/index_socio.php");
             // header("Location:../index_socio.php");
             break;
         case 'ADMIN':
