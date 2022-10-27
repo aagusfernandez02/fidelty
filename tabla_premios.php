@@ -32,7 +32,7 @@ if( !isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN' ){
         <i class="fa-solid fa-backward"></i><div id="go_back_tooltip"> VOLVER</div>
     </a>
     <main class="main_admin">
-    <table class="demo">
+    <table class="tabla">
         <caption>Premios</caption>
         <thead>
             <tr>

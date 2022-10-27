@@ -9,7 +9,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'SOCIO') {
     if (isset($_SESSION['actualizar_estado']) && $_SESSION['actualizar_estado'] == true) {
         $dni = $_SESSION['dni'];
         $password = $_SESSION['password'];
-        $consulta = mysqli_query($conexion, " SELECT * FROM socios WHERE dni = '$dni' AND password='$password';");
+        $consulta = mysqli_query($conexion, "SELECT * FROM socios WHERE dni = '$dni' AND password='$password';");
         $resultado = mysqli_num_rows($consulta);
         if ($resultado != 0) {
             $respuesta = mysqli_fetch_array($consulta);
@@ -18,6 +18,15 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'SOCIO') {
         }
     }
 }
+
+include("php/conexion.php");
+if(isset($_GET['premio']) AND $_GET['premio']!=""){
+    $premios = mysqli_query($conexion, "SELECT * FROM premios WHERE nombre LIKE '%".$_GET['premio']."%'");
+} else {
+    $premios = mysqli_query($conexion, "SELECT * FROM premios");
+}
+$premios_x_pag = 6;
+$paginas = ceil(mysqli_num_rows($premios) / $premios_x_pag);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +45,12 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'SOCIO') {
 </head>
 
 <body>
+    <?php
+    // PAGINACION
+    if(!isset($_GET['pagina']) || $_GET['pagina']=='') $_GET['pagina']=1;
+    if($_GET['pagina']>$paginas) $_GET['pagina']=$paginas;
+    if($_GET['pagina']<=0) $_GET['pagina']=1;
+    ?>
     <header>
         <h2 class="display-5 text-center"><a href="index_socio.php">Fidelty</a></h2>
         <div class="saludo">
@@ -47,47 +62,62 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'SOCIO') {
     <main class="main_socio">
         <form class="searchbar_container" method="get" action="index_socio.php">
             <div class="searchbar">
-                <input name="premio" type="text" class="form-control" placeholder="Premio" value="<?php if(isset($_GET['premio'])){$_SESSION['pagina']=1; echo $_GET['premio'];}else{echo "";}?>">
+                <input name="premio" type="text" class="form-control" placeholder="Premio" value="<?php if(isset($_GET['premio'])) echo $_GET['premio']; else echo ""; ?>">
                 <button type="submit" class="btn btn-light"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </form>
         <div class="container_premios">
             <?php
-            $offset = ($_SESSION['pagina']-1)*6;
-            $query = "SELECT * FROM premios ";
-            if( isset($_GET['premio']) and $_GET['premio']!="" ){
-                $query = $query." WHERE premios.nombre LIKE '%".$_GET['premio']."%'";
+            $iniciar = ($_GET['pagina']-1)*$premios_x_pag;
+            if(isset($_GET['premio']) AND $_GET['premio']!=""){
+                $premios_pag = mysqli_query($conexion, "SELECT * FROM premios WHERE nombre LIKE '%".$_GET['premio']."%' LIMIT $iniciar,$premios_x_pag");
+            } else {            
+            $premios_pag = mysqli_query($conexion, "SELECT * FROM premios LIMIT $iniciar,$premios_x_pag");
             }
-            $query = $query." LIMIT 6 OFFSET $offset;";    
-            $consulta = mysqli_query($conexion, $query);
-            $resultado = mysqli_num_rows($consulta);
-            if ($resultado != 0) {
-                while ($row = mysqli_fetch_assoc($consulta)) {
+            if( mysqli_num_rows($premios_pag)>0 ){
+                $premio = mysqli_fetch_assoc($premios_pag);
+                while($premio){
                     $disabled = '';
-                    if($row['saldo']>$_SESSION['saldo']) $disabled='disabled';
+                    if($premio['saldo']>$_SESSION['saldo']) $disabled='disabled';
                     echo '
                     <form class="card" style="width: 18rem;" action="php/funciones.php" method="get" >
-                        <input name="premio" value='.$row['id'],' style="display:none;">
-                        <img src="'.$row['img'].'" class="card-img-top" alt="'.$row['nombre'].'">
+                        <input name="premio" value='.$premio['id'],' style="display:none;">
+                        <img src="'.$premio['img'].'" class="card-img-top" alt="'.$premio['nombre'].'">
                         <div class="card-body">
-                            <h5 class="card-title">'.$row['nombre'].'</h5>
-                            <p class="card-text">'.$row['descripcion'].'</p>
-                            <button href="#" class="btn btn-success"'.$disabled.'> CANJEAR ('.$row['saldo'].' ptos)</button>
+                            <h5 class="card-title">'.$premio['nombre'].'</h5>
+                            <p class="card-text">'.$premio['descripcion'].'</p>
+                            <button href="#" class="btn btn-success"'.$disabled.'> CANJEAR ('.$premio['saldo'].' ptos)</button>
                         </div>
                     </form>
                     ';
+                    $premio = mysqli_fetch_assoc($premios_pag);
                 }
             } else {
                 echo "No hay premios registrados";
             }
             ?>               
         </div>
-        
-        <div class="controles-paginacion">
-            <a href="php/funciones.php?paginacion=prev"><i class="fa-solid fa-angle-left"></i></a>
-            <?php echo "Pagina ".$_SESSION['pagina'].' de '.$_SESSION['cantidad paginas']?>
-            <a href="php/funciones.php?paginacion=next"><i class="fa-solid fa-angle-right"></i></a>
-        </div>
+        <nav aria-label="Page navigation example"  class="controles-paginacion">
+            <ul class="pagination">
+                <li class="page-item <?php echo $_GET['pagina']<=1 ? 'disabled':'' ?>">
+                <a class="page-link" href="index_socio.php?pagina=<?php echo $_GET['pagina']-1; ?>" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+                </li>
+                <?php for($i=0; $i<$paginas; $i++): ?>
+                <li class="page-item <?php echo $_GET['pagina']==$i+1 ? 'active':'' ?>">
+                    <a class="page-link" href="index_socio.php?pagina=<?php echo $i+1; ?>">
+                        <?php echo $i+1; ?>
+                    </a>
+                </li>
+                <?php endfor ?>
+                <li class="page-item <?php echo $_GET['pagina']>=$paginas ? 'disabled':'' ?>">
+                <a class="page-link" href="index_socio.php?pagina=<?php echo $_GET['pagina']+1; ?>" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+                </li>
+            </ul>
+        </nav>
     </main>
 
     <footer>
