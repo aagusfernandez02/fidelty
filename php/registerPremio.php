@@ -11,7 +11,7 @@
     // $ingreso_con_stock = $_POST['ingreso_con_stock'];
     // $ingreso_con_punto_reposicion = $_POST['ingreso_con_punto_reposicion'];
 
-    include("./conexion.php");
+    include("conexion.php");
     
    if( !isset($_POST['ingreso_con_punto_reposicion']) and !isset($_POST['ingreso_con_stock']) ){
        $consulta=mysqli_query($conexion, "INSERT INTO premios(id, saldo, img, nombre, descripcion) VALUES(NULL, $saldo, '$img', '$nombre', '$descripcion');");

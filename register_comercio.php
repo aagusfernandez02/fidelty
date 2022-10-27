@@ -31,7 +31,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
         <i class="fa-solid fa-backward"></i><div id="go_back_tooltip"> VOLVER</div>
     </a>
     <main class="main_register_comercio">
-        <img src="./img/comercio.png" alt="imagen representativa de un comercio" class="imagen_aux">
+        <img src="img/comercio.png" alt="imagen representativa de un comercio" class="imagen_aux">
         <form class="regiter_comercio_form" method="post" action="php/registerComercio.php">
             <h1 class="display-5 mb-3">REGISTRAR COMERCIO</h1>
             <div class="row mb-3">

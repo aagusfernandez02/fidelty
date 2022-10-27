@@ -25,13 +25,13 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
 <body>
     <header>
         <h2 class="display-5 text-center"><a href="index_admin.php">Fidelty</a></h2>
-        <a href="./php/funciones.php?session_destroy=true"><i class="fa-solid fa-right-from-bracket"></i></a>
+        <a href="php/funciones.php?session_destroy=true"><i class="fa-solid fa-right-from-bracket"></i></a>
     </header>
-    <a class="go_back" href="./index_admin.php">
+    <a class="go_back" href="index_admin.php">
         <i class="fa-solid fa-backward"></i><div id="go_back_tooltip"> VOLVER</div>
     </a>
     <main class="main_register_comercio">
-        <img src="./img/canje.png" alt="imagen representativa de un canje" class="imagen_aux">
+        <img src="img/canje.png" alt="imagen representativa de un canje" class="imagen_aux">
         <form class="regiter_comercio_form" method="post" action="php/registerPremio.php">
             <h1 class="display-5 mb-3">CREAR PREMIO</h1>
             <div class="row mb-3">
@@ -116,7 +116,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
         echo "<script>toastr.error('Error en la creación del premio','ERROR')</script>";
     }
     ?>
-    <script src="./js/control_checkbox_inputs_opcionales.js"></script>
+    <script src="js/control_checkbox_inputs_opcionales.js"></script>
 </body>
 
 </html>

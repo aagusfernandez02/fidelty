@@ -2,7 +2,7 @@
 <?php
     session_start();
 
-    $id = $_POST['nombre']; // Recibe el ID
+    $id = $_GET['id-premio']; // Recibe el ID
 
     include("conexion.php");
     
@@ -12,10 +12,10 @@
     if( $resultado !=0 ){
         $_SESSION['estado_delete'] = "DELETE_PREMIO_OK";
         $consulta=mysqli_query($conexion, "DELETE FROM premios WHERE id='$id'");
-        header("Location:../delete_premio.php");
+        header("Location:../tabla_premios.php");
     } else {
         $_SESSION['estado_delete'] = "DELETE_PREMIO_ERROR";
-        header("Location:../delete_premio.php");
+        header("Location:../tabla_premios.php");
     }
 ?>
 

@@ -30,11 +30,10 @@ if( !isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN' ){
         <div class="admin-options-container">
             <h1 class="display-6 text-center">OPCIONES DE ADMINISTRADOR</h1>
             <ul>
-                <li><a href="./register_comercio.php" class="lead">Registrar comercio</a></li>
-                <li><a href="./delete_comercio.php" class="lead">Dar de baja comercio</a></li>
-                <li><a href="./create_premio.php" class="lead">Crear premio</a></li>
-                <li><a href="./edit_premio.php" class="lead">Editar premio</a></li>
-                <li><a href="./delete_premio.php" class="lead">Eliminar premio</a></li>
+                <li><a href="create_premio.php" class="lead">Crear premio</a></li>
+                <li><a href="tabla_premios.php" class="lead">Ver/editar/eliminar premios</a></li>
+                <li><a href="register_comercio.php" class="lead">Registrar comercio</a></li>
+                <li><a href="delete_comercio.php" class="lead">Dar de baja comercio</a></li>
             </ul>
         </div>
     </main>

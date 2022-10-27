@@ -34,35 +34,24 @@ if( isset($_GET['id-premio']) and $_GET['id-premio']!="" ){
 <body>
     <header>
         <h2 class="display-5 text-center"><a href="index_admin.php">Fidelty</a></h2>
-        <a href="./php/funciones.php?session_destroy=true"><i class="fa-solid fa-right-from-bracket"></i></a>
+        <a href="php/funciones.php?session_destroy=true"><i class="fa-solid fa-right-from-bracket"></i></a>
     </header>
-    <a class="go_back" href="./index_admin.php">
+    <a class="go_back" href="tabla_premios.php">
         <i class="fa-solid fa-backward"></i><div id="go_back_tooltip"> VOLVER</div>
     </a>
     <main class="main_register_comercio">
-        <img src="./img/canje.png" alt="imagen representativa de un canje" class="imagen_aux">
-        <form class="regiter_comercio_form" method="post" action="php/editPremio.php">
+        <!-- <img src="img/canje.png" alt="imagen representativa de un canje" class="imagen_aux"> -->
+        <img src="<?php echo $premio_editar['img']; ?>" alt="imagen representativa del canje" class="imagen_aux">
+        <form class="regiter_comercio_form" method="post" action=<?php if(isset($_GET['id-premio']) and $_GET['id-premio']!="")echo "php/editPremio.php?id-premio=".$_GET['id-premio']; else echo "php/editPremio.php"; ?>>
             <h1 class="display-5 mb-3">EDITAR PREMIO</h1>
             <div class="row mb-3">
                 <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
-                <select class="form-select" aria-label="Default select example" name="nombre" id='dropdown_premios'>
                 <?php 
-                    include("php/conexion.php");
-                    $result = mysqli_query($conexion, "SELECT premios.nombre, premios.id FROM premios");
-                    while ($row = mysqli_fetch_assoc($result))
-                    {
-                        if( isset($_GET['id-premio']) and $_GET['id-premio']!="" ){
-                            if($_GET['id-premio'] == $row['id']) {
-                                echo "<option value=".$row['id']." selected>".$row['nombre']."</option>";
-                            } else {
-                                echo "<option value=".$row['id'].">".$row['nombre']."</option>";
-                            }
-                        } else {
-                            echo "<option value=".$row['id'].">".$row['nombre']."</option>";
-                        }
-                    }
-                ?>    
-                </select>
+                    if( isset($_GET['id-premio']) and $_GET['id-premio']!="")
+                        echo '<input type="text" class="form-control" name="nombre" disabled value="'.$premio_editar['nombre'].'">';
+                    else 
+                        echo '<input type="text" class="form-control" disabled name="nombre">';
+                ?>
             </div>
             <div class="row mb-3">
                 <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>

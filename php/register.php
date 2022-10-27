@@ -11,7 +11,7 @@
     
     // echo $nombre." - ".$apellido." - ".$dni." - ".$fecha_nacimiento." - ".$email." - ".$password;
 
-    include("./conexion.php");
+    include("conexion.php");
     
     $consulta=mysqli_query($conexion, "SELECT * FROM socios WHERE dni = '$dni';");
     $resultado=mysqli_num_rows($consulta);

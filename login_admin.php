@@ -26,8 +26,8 @@
     <h1 class="display-4 text-center mt-4 mb-4">Bienvenido a Fidelty!</h1>
     <div class="loginContainer adminContainer">
         <!-- Solapas -->
-        <div id="solapaSocio" class="loginContainer_solapa adminSolapas noActive"><a href="./login_socio.php">Socio</a></div>
-        <div id="solapaComercio" class="loginContainer_solapa adminSolapas noActive"><a href="./login_comercio.html">Comercio</a></div>
+        <div id="solapaSocio" class="loginContainer_solapa adminSolapas noActive"><a href="login_socio.php">Socio</a></div>
+        <div id="solapaComercio" class="loginContainer_solapa adminSolapas noActive"><a href="login_comercio.html">Comercio</a></div>
 
         <!-- Container -->
         <form class="loginContainer_formularioContainer" method="post" action="php/loginAdmin.php">

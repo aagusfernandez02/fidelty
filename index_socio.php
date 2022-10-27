@@ -47,7 +47,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'SOCIO') {
     <main class="main_socio">
         <form class="searchbar_container" method="get" action="index_socio.php">
             <div class="searchbar">
-                <input name="premio" type="text" class="form-control" placeholder="Premio" value="<?php if(isset($_GET['premio'])){echo $_GET['premio'];}else{echo "";}?>">
+                <input name="premio" type="text" class="form-control" placeholder="Premio" value="<?php if(isset($_GET['premio'])){$_SESSION['pagina']=1; echo $_GET['premio'];}else{echo "";}?>">
                 <button type="submit" class="btn btn-light"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </form>
