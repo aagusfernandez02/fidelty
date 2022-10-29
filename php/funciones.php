@@ -1,4 +1,10 @@
 <?php 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require 'sendemail/src/Exception.php';
+require 'sendemail/src/PHPMailer.php';
+require 'sendemail/src/SMTP.php';
+
 session_start();
 
 if (isset($_GET['session_destroy']) && $_GET['session_destroy'] == 'true') {
@@ -22,11 +28,24 @@ if (isset($_GET['premio']) && $_GET['premio'] != '') {
                     echo "Fallo guardando el canje";
                 if( !mysqli_query($conexion,"UPDATE socios SET saldo=saldo-".$premio['saldo']." WHERE socios.dni = ".$_SESSION['dni']))
                     echo "Fallo descontando el saldo";
-                if( mail($_SESSION['email'], "Fidelty - Canje premio - ".$premio['nombre'], "Hola ".$_SESSION['nombre'].", queriamos comunicarle que su canje del premio: '".$premio['nombre']." (".$premio['saldo']." puntos)' fue realizada correctamente y pronto nos comunicaremos con usted para continuar el proceso de entrega del premio.") ){
-                    echo "EMAIL ENVIADO OK";
-                } else {
-                    echo "FALLO ENVIO EMAIL";
-                }
+                
+                // Inicio envio mail
+                $mail = new PHPMailer(true);
+                $mail->isSMTP();
+                $mail->Host='smtp.gmail.com';
+                $mail->SMTPAuth=true;
+                $mail->Username='af.agusfernandez02@gmail.com';
+                $mail->Password='hgfdnesoxizvcxno';
+                $mail->SMTPSecure='ssl';
+                $mail->Port=465;
+                $mail->setFrom('af.agusfernandez02@gmail.com');
+                $mail->addAddress($_SESSION['email']);
+                $mail->isHTML(true);
+                $mail->Subject="Fidelty - Canje premio - ".$premio['nombre'];
+                $mail->Body="Hola ".$_SESSION['nombre'].", queriamos comunicarle que su canje del premio: '".$premio['nombre']." (".$premio['saldo']." puntos)' fue realizado correctamente y pronto nos comunicaremos con usted para continuar el proceso de entrega del premio.";
+                $mail->send();
+                // Fin envio mail
+
                 $_SESSION['actualizar_estado'] = true;
                 echo $_SESSION['email'], "Fidelty - Canje premio - ".$premio['nombre'], "Hola ".$_SESSION['nombre'].", queriamos comunicarle que su canje del premio: '".$premio['nombre']." (".$premio['saldo']." puntos)' fue realizada correctamente y pronto nos comunicaremos con usted para continuar el proceso de entrega del premio.";
             } else {

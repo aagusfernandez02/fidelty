@@ -119,7 +119,7 @@ $paginas = ceil(mysqli_num_rows($premios) / $premios_x_pag);
             </ul>
         </nav>
     </main>
-
+                    
     <footer>
         <p class="footer_derechos">©Derechos reservados Agustín Fernandez 2022-2023</p>
         <div class="footer_redes">
