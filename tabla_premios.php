@@ -49,7 +49,7 @@ if( !isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN' ){
         <tbody>
             <?php 
                 include("php/conexion.php");
-                $result = mysqli_query($conexion, "SELECT * FROM premios");
+                $result = mysqli_query($conexion, "SELECT * FROM premios ORDER BY nombre");
                 while ($row = mysqli_fetch_assoc($result))
                 {
                     echo "
