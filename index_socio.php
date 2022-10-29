@@ -62,10 +62,14 @@ $paginas = ceil(mysqli_num_rows($premios) / $premios_x_pag);
     <main class="main_socio">
         <form class="searchbar_container" method="get" action="index_socio.php">
             <div class="searchbar">
-                <input name="premio" type="text" class="form-control" placeholder="Premio" value="<?php if(isset($_GET['premio'])) echo $_GET['premio']; else echo ""; ?>">
+                <input name="premio" type="text" class="form-control" placeholder="Premio">
                 <button type="submit" class="btn btn-light"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </form>
+        <?php 
+        if(isset($_GET['premio']) and $_GET['premio']!="") 
+            echo "<p class='text-center'> Filtro: ".$_GET['premio']."</p>"; 
+        ?>
         <div class="container_premios">
             <?php
             $iniciar = ($_GET['pagina']-1)*$premios_x_pag;

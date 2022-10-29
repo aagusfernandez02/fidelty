@@ -24,7 +24,7 @@ if (isset($_GET['premio']) && $_GET['premio'] != '') {
             if( mysqli_query($conexion, "UPDATE premios SET premios.stock = premios.stock - 1 WHERE id = '$id_premio';") ){
                 // Reducción stock hecha --> Registro canje y descuento puntos socio
                 $_SESSION['estado_canje'] = "CANJE_OK";
-                if( !mysqli_query($conexion,"INSERT INTO canjes(id_canje, id_premio, dni_socio) VALUES (NULL, ".$premio['id'].", ".$_SESSION['dni'].");") )
+                if( !mysqli_query($conexion,"INSERT INTO canjes(id_canje, id_premio, dni_socio, fecha) VALUES (NULL, ".$premio['id'].", ".$_SESSION['dni'].",CURRENT_DATE());") )
                     echo "Fallo guardando el canje";
                 if( !mysqli_query($conexion,"UPDATE socios SET saldo=saldo-".$premio['saldo']." WHERE socios.dni = ".$_SESSION['dni']))
                     echo "Fallo descontando el saldo";

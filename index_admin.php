@@ -34,6 +34,8 @@ if( !isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN' ){
                 <li><a href="tabla_premios.php" class="lead">Ver/editar/eliminar premios</a></li>
                 <li><a href="register_comercio.php" class="lead">Registrar comercio</a></li>
                 <li><a href="delete_comercio.php" class="lead">Dar de baja comercio</a></li>
+                <li><a href="canjes_socios.php" class="lead">Canjes socios</a></li>
+                <li><a href="delete_comercio.php" class="lead">Actividades red</a></li>
             </ul>
         </div>
     </main>

@@ -27,7 +27,7 @@
     <div class="loginContainer">
         <!-- Solapas -->
         <div id="solapaSocio" class="loginContainer_solapa active"><a href="#">Socio</a></div>
-        <div id="solapaComercio" class="loginContainer_solapa noActive"><a href="login_comercio.html">Comercio</a></div>
+        <div id="solapaComercio" class="loginContainer_solapa noActive"><a href="login_comercio.php">Comercio</a></div>
 
         <!-- Container -->
         <form class="loginContainer_formularioContainer" method="post" action="php/loginSocio.php">

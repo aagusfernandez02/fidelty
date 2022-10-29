@@ -1,0 +1,154 @@
+/* 
+========================================================================================================= 
+======================================          CSS RESET          ====================================== 
+=========================================================================================================
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+    color: inherit;
+    text-decoration: inherit;
+    font-weight: inherit;
+}
+
+
+/* 
+========================================================================================================= 
+======================================            ADMIN            ====================================== 
+=========================================================================================================
+*/
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+main {
+    min-height: calc(100vh - 8rem);
+    padding: 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+header {
+    width: 100%;
+    height: 5rem;
+    background-color: #ffb9b9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+header h2 {
+    font-style: italic;
+}
+
+header i {
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.saludo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+footer {
+    width: 100%;
+    height: 3rem;
+    background-color: #bb7979;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.footer_derechos {
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+.footer_redes {
+    font-size: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.go_back {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 1rem;
+    position: fixed;
+    top: 5rem;
+    right: 1rem;
+    font-size: 2rem;
+}
+
+.go_back i:hover+#go_back_tooltip {
+    transform: scaleX(1);
+    transition: .25s;
+}
+
+#go_back_tooltip {
+    opacity: .6;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: .25s;
+}
+
+.inputs_opcionales_control {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.inputs_opcionales_control label {
+    font-size: 1rem;
+}
+
+.form_ingreso_venta{
+    width: 50VW;
+}
+
+.formularioContainer_buttons{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    footer {
+        height: auto;
+        flex-direction: column;
+    }
+    .footer_derechos {
+        font-size: 1rem;
+    }
+    #go_back_tooltip {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {}

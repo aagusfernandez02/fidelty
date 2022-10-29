@@ -38,8 +38,8 @@ if( !isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN' ){
             <tr>
                 <th>Nombre</th>
                 <th>Descripcion</th>
-                <th>Saldo</th>
                 <th>Stock</th>
+                <th>Saldo</th>
                 <th>Pto. reposicion</th>
                 <th>Imagen</th>
                 <th>EDITAR</th>

@@ -2,6 +2,9 @@
     border: 1px solid #C0C0C0;
     border-collapse: collapse;
     padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
 }
 
 .tabla th {
