@@ -13,13 +13,12 @@ if( isset($_SESSION['estado']) ){
         case 'ADMIN':
             header("Location: index_admin.php");
             break;
-        default:
+        case 'COMERCIO':
+            header("Location: index_comercio.php");
+        break;
             header("Location: login_socio.php");
     }
 
 } else {
     header("Location: login_socio.php");
 }
-    
-    
-?>

@@ -2,7 +2,7 @@
 
 session_start();
 if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
-    header("Location:../login_admin.php");
+    header("Location: index.php");
 }
 
 ?>

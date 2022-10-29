@@ -1,9 +1,7 @@
 <?php 
     session_start(); 
-    if( isset($_SESSION['estado']) && $_SESSION['estado'] == 'ADMIN' ){
-        header("Location: index_admin.php");
-    } else if( isset($_SESSION['estado']) && $_SESSION['estado'] == 'SOCIO' ){
-        header("Location: index_socio.php");
+    if( isset($_SESSION['estado']) ){
+        header("Location: index.php");
     }
 ?>
 <!DOCTYPE html>

@@ -23,25 +23,23 @@ if (!isset($_SESSION['estado']) and $_SESSION['estado'] != 'COMERCIO') {
 
 <body>
     <header>
-        <h2 class="display-5 text-center"><a href="index_admin.php">Fidelty</a></h2>
+        <h2 class="display-5 text-center"><a href="index_comercio.php">Fidelty</a></h2>
         <a href="php/funciones.php?session_destroy=true"><i class="fa-solid fa-right-from-bracket"></i></a>
     </header>
-    <a class="go_back" href="index_admin.php">
-        <i class="fa-solid fa-backward"></i><div id="go_back_tooltip"> VOLVER</div>
-    </a>
     <main class="">
-        <form class="form_ingreso_venta" method="post" action="">
-            <h1 class="display-6 mb-3">REGISTRAR COMPRA</h1>
+        <form class="form_ingreso_venta" method="post" action="php/registrarCompra.php">
+            <h1 class="display-6 mb-3 text-center">REGISTRAR COMPRA</h1>
+            <p class="mb-5 text-center">Reintegro 25%</p>
             <div class="row mb-3">
-                <label for="nombre" class="col-sm-2 col-form-label">DNI Socio</label>
+                <label for="dni" class="col-sm-2 col-form-label">DNI Socio</label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" name="nombre" required>
+                    <input type="number" class="form-control" name="dni" required>
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="monto" class="col-sm-2 col-form-label">Monto ($)</label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" name="monto" placeholder="$15000" required>
+                    <input type="number" class="form-control" name="monto" placeholder="15000" required>
                 </div>
             </div>
             <div class="formularioContainer_buttons">
@@ -70,13 +68,18 @@ if (!isset($_SESSION['estado']) and $_SESSION['estado'] != 'COMERCIO') {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- JS -->
     <?php
-    if (isset($_SESSION['estado_delete']) && $_SESSION['estado_delete'] == "DELETE_COMERCIO_OK") {
-        $_SESSION['estado_delete'] = null;
-        echo "<script>toastr.success('Comercio retirado correctamente')</script>";
+    if (isset($_SESSION['estado']) && $_SESSION['estado'] == "COMPRA_OK") {
+        $_SESSION['estado'] = null;
+        echo "<script>toastr.success('El socio ha recibido ".$_SESSION['monto-compra']." puntos','COMPRA OK')</script>";
+        $_SESSION['monto-compra']=null;
     }
-    if (isset($_SESSION['estado_delete']) && $_SESSION['estado_delete'] == "DELETE_COMERCIO_ERROR") {
-        $_SESSION['estado_delete'] = null;
-        echo "<script>toastr.error('Comercio no existente','ERROR')</script>";
+    if (isset($_SESSION['estado']) && $_SESSION['estado'] == "COMPRA_ERROR_BD") {
+        $_SESSION['estado'] = null;
+        echo "<script>toastr.error('No se pudo actualizar el saldo del socio','ERROR')</script>";
+    }
+    if (isset($_SESSION['estado']) && $_SESSION['estado'] == "COMPRA_ERROR") {
+        $_SESSION['estado'] = null;
+        echo "<script>toastr.error('DNI no corresponde a un socio registrado','ERROR')</script>";
     }
     ?>
 </body>

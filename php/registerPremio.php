@@ -49,7 +49,7 @@ if ($resultado > 0) {
         $mail->addAddress($email['email']);
         $mail->isHTML(true);
         $mail->Subject = "Fidelty - Ingreso nuevo premio";
-        $mail->Body = "Hola, queriamos comunicarle que hemos incorporado un nuevo premio: <br>   -".$nombre."<br>   -".$descripcion."<br>Para canjearlo necesita " .$saldo." puntos. <br><br><img src='$img' alt='imagen premio'>";
+        $mail->Body = "Hola, queriamos comunicarle que hemos incorporado un nuevo premio: <br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>".$nombre."</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;<em>".$descripcion."</em><br><br>Para canjearlo necesita " .$saldo." puntos. <br><br><img src='$img' alt='imagen premio'>";
         $mail->send();
 
         $email = mysqli_fetch_assoc($consulta);

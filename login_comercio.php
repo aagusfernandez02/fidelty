@@ -1,8 +1,8 @@
 <?php
-session_start();
-if (!isset($_SESSION['estado']) and ($_SESSION['estado'] == 'SOCIO' or $_SESSION['estado'] == 'COMERCIO' or $_SESSION['estado'] == 'ADMIN')) {
-    header("Location: index.php");
-} 
+    session_start(); 
+    if( isset($_SESSION['estado']) ){
+        header("Location: index.php");
+    }
 
 ?>
 <!DOCTYPE html>

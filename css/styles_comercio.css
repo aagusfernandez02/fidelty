@@ -90,33 +90,6 @@ footer {
     gap: 1rem;
 }
 
-.go_back {
-    margin-top: 1rem;
-    margin-left: 1rem;
-    margin-bottom: 1rem;
-    font-size: 2rem;
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    gap: 1rem;
-    position: fixed;
-    top: 5rem;
-    right: 1rem;
-    font-size: 2rem;
-}
-
-.go_back i:hover+#go_back_tooltip {
-    transform: scaleX(1);
-    transition: .25s;
-}
-
-#go_back_tooltip {
-    opacity: .6;
-    transform-origin: right;
-    transform: scaleX(0);
-    transition: .25s;
-}
-
 .inputs_opcionales_control {
     display: flex;
     justify-content: space-around;

@@ -14,8 +14,8 @@
 	    $_SESSION['cuit']=$respuesta['cuit'];
 	    $_SESSION['direccion']=$respuesta['direccion'];
 	    $_SESSION['email']=$respuesta['email'];
-        $_SESSION['estado']='COMERCIO';
         $_SESSION['password'] = $password;
+        $_SESSION['estado']='COMERCIO';
         header("Location: ../index_comercio.php");
     } else {
         $_SESSION['estado'] = "COMERCIO_ERROR";

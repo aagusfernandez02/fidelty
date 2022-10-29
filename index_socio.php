@@ -104,19 +104,31 @@ $paginas = ceil(mysqli_num_rows($premios) / $premios_x_pag);
         <nav aria-label="Page navigation example"  class="controles-paginacion">
             <ul class="pagination">
                 <li class="page-item <?php echo $_GET['pagina']<=1 ? 'disabled':'' ?>">
-                <a class="page-link" href="index_socio.php?pagina=<?php echo $_GET['pagina']-1; ?>" aria-label="Previous">
+                <a class="page-link" href="index_socio.php?<?php 
+                    echo "pagina=".$_GET['pagina']-1;
+                    if( isset($_GET['premio']) and $_GET['premio']!="")
+                        echo "&premio=".$_GET['premio'];
+                ?>" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
                 </li>
                 <?php for($i=0; $i<$paginas; $i++): ?>
                 <li class="page-item <?php echo $_GET['pagina']==$i+1 ? 'active':'' ?>">
-                    <a class="page-link" href="index_socio.php?pagina=<?php echo $i+1; ?>">
+                    <a class="page-link" href="index_socio.php?<?php 
+                    echo "pagina=".$i+1;
+                    if( isset($_GET['premio']) and $_GET['premio']!="")
+                        echo "&premio=".$_GET['premio'];
+                ?>">
                         <?php echo $i+1; ?>
                     </a>
                 </li>
                 <?php endfor ?>
                 <li class="page-item <?php echo $_GET['pagina']>=$paginas ? 'disabled':'' ?>">
-                <a class="page-link" href="index_socio.php?pagina=<?php echo $_GET['pagina']+1; ?>" aria-label="Next">
+                <a class="page-link" href="index_socio.php?<?php 
+                    echo "pagina=".$_GET['pagina']+1;
+                    if( isset($_GET['premio']) and $_GET['premio']!="")
+                        echo "&premio=".$_GET['premio'];
+                ?>" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
                 </li>
