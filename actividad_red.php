@@ -31,31 +31,39 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
         <i class="fa-solid fa-backward"></i>
         <div id="go_back_tooltip"> VOLVER</div>
     </a>
-    <h1 class="display-4 text-center mt-4 mb-4">Canjes socios</h1>
-    <main>
-        <form class="searchbar_container" method="get" action="canjes_socios.php">
+    <h1 class="display-4 text-center mt-4 mb-4">Actividad de la red</h1>
+    <main class="main_admin_canjes-socios">
+        <form class="searchbar_container" method="get" action="actividad_red.php">
             <div class="searchbar">
-                <input name="socio" type="text" class="form-control" placeholder="DNI socio">
+                <input name="socio" type="text" class="form-control" placeholder="DNI socio" value="<?php if(isset($_GET['socio']) and $_GET['socio']!="") echo $_GET['socio']; ?>" >
+                <button type="submit" class="btn btn-light"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            <div class="searchbar mt-2">
+                <input name="comercio" type="text" class="form-control" placeholder="CUIT comercio" value="<?php if(isset($_GET['comercio']) and $_GET['comercio']!="") echo $_GET['comercio']; ?>">
                 <button type="submit" class="btn btn-light"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </form>
-        <?php  if(isset($_GET['socio']) AND $_GET['socio']!="") echo "<h6>DNI: ".$_GET['socio']."</h6>" ?>
         <table class="tabla mt-4">
                 <?php
                 include("php/conexion.php");
-                if (isset($_GET['socio']) and $_GET['socio'] != '') {
-                    $result = mysqli_query($conexion, "SELECT c.fecha, c.dni_socio, p.nombre FROM premios p, canjes c WHERE p.id = c.id_premio AND c.dni_socio ='" . $_GET['socio'] . "' ORDER BY c.fecha DESC");
+                if((isset($_GET['socio']) and $_GET['socio'] != '')and(isset($_GET['comercio']) and $_GET['comercio'] != '')){
+                    $result = mysqli_query($conexion, "SELECT c.fecha, c.importe, c.cuit_comercio, c.dni_socio FROM compras c WHERE c.dni_socio = '".$_GET['socio']."' AND c.cuit_comercio = '".$_GET['comercio']."' ORDER BY c.cuit_comercio;");                   
+                }else if (isset($_GET['socio']) and $_GET['socio'] != '') {
+                    $result = mysqli_query($conexion, "SELECT c.fecha, c.importe, c.cuit_comercio, c.dni_socio FROM compras c WHERE c.dni_socio = '".$_GET['socio']."' ORDER BY c.fecha DESC;");                   
+                } else if (isset($_GET['comercio']) and $_GET['comercio'] != ''){
+                    $result = mysqli_query($conexion, "SELECT c.fecha, c.importe, c.cuit_comercio, c.dni_socio FROM compras c WHERE c.cuit_comercio = '".$_GET['comercio']."' ORDER BY c.fecha DESC;");                   
                 } else {
-                    $result = mysqli_query($conexion, "SELECT c.fecha, c.dni_socio, p.nombre FROM premios p, canjes c WHERE p.id = c.id_premio ORDER BY c.dni_socio");
+                    $result = mysqli_query($conexion, "SELECT c.fecha, c.importe, c.cuit_comercio, c.dni_socio FROM compras c");
                 }
                 if( mysqli_num_rows($result)>0 ){
                     echo "
                     <caption></caption>
                         <thead>
                             <tr>
-                                <th>Fecha canje</th>
+                                <th>Fecha compra</th>
+                                <th>Importe ($)</th>
+                                <th>Cuit comercio</th>
                                 <th>DNI socio</th>
-                                <th>Premio</th>
                             </tr>
                         </thead>
                         <tbody>";
@@ -64,15 +72,16 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
                         echo "
                             <tr>
                                 <td>" . $row['fecha'] . "</td>
+                                <td>" . $row['importe'] . "</td>
+                                <td>" . $row['cuit_comercio'] . "</td>
                                 <td>" . $row['dni_socio'] . "</td>
-                                <td>" . $row['nombre'] . "</td>
                             </tr>
                         ";
                         $row = mysqli_fetch_assoc($result);
                     }
                     echo "</tbody>";
                 } else {
-                    echo "No hay premios registrados";
+                    echo "No se registraron compras";
                 }
                 ?>
         </table>

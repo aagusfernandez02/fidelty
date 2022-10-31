@@ -2,6 +2,7 @@
     session_start();
 
     $dni = $_POST['dni'];
+    $cuit = $_SESSION['cuit'];
     $monto = $_POST['monto'];
 
     include("conexion.php");
@@ -19,9 +20,11 @@
             // SALDO DESCONTADO OK
             $_SESSION['estado'] = "COMPRA_OK";
             $_SESSION['monto-compra'] = $saldo;
-            header("Location: ../index_comercio.php"); 
-
+            
             // REGISTRAR EN TABLA
+            mysqli_query($conexion, "INSERT INTO compras (id_compra, fecha, importe, cuit_comercio, dni_socio) VALUES (0,CURRENT_DATE(), $monto, '$cuit', $dni)");
+        
+            header("Location: ../index_comercio.php"); 
         } else{
             $_SESSION['estado'] = "COMPRA_ERROR_BD";
             header("Location: ../index_comercio.php");

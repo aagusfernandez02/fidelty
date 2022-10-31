@@ -32,59 +32,18 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
     </a>
     <main class="main_register_comercio">
         <img src="img/canje.png" alt="imagen representativa de un canje" class="imagen_aux">
-        <form class="regiter_comercio_form" method="post" action="php/registerPremio.php">
-            <h1 class="display-5 mb-3">CREAR PREMIO</h1>
+        <form class="regiter_comercio_form" method="post" action="php/registerProveedor.php">
+            <h1 class="display-5 mb-3">REGISTRAR PROVEEDOR</h1>
             <div class="row mb-3">
-                <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+                <label for="razon_social" class="col-sm-2 col-form-label">Razon social</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="nombre" required>
+                    <input type="text" class="form-control" name="razon_social" required>
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
+                <label for="telefono" class="col-sm-2 col-form-label">Telefono</label>
                 <div class="col-sm-10">
-                    <textarea type="text" class="form-control" name="descripcion" required style="resize: none"></textarea>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="saldo" class="col-sm-2 col-form-label">Saldo</label>
-                <div class="col-sm-10">
-                    <input type="number" class="form-control" name="saldo" required>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="proveedor" class="col-sm-2 col-form-label">Proveedor</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="proveedor" required placeholder="Razon social">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="img" class="col-sm-2 col-form-label">Imagen</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="img" placeholder="https://urlImagen.com/" required>
-                </div>
-            </div>
-            <!-- INPUTS OPCIONALES -->
-            <div class="inputs_opcionales_control mb-3">
-                <div>
-                    <input type="checkbox" id="ingreso_con_stock" name="ingreso_con_stock">
-                    <label for="ingreso_con_stock">¿Ingreso con stock?</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="ingreso_con_punto_reposicion" name="ingreso_con_punto_reposicion">
-                    <label for="ingreso_con_punto_reposicion">¿Ingreso con punto de reposición?</label>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="stock" class="col-sm-2 col-form-label">Stock</label>
-                <div class="col-sm-10">
-                    <input id="input_stock" type="number" class="form-control" name="stock" disabled>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="punto_reposicion" class="col-sm-2 col-form-label">Pto. repos.</label>
-                <div class="col-sm-10">
-                    <input id="input_punto_reposicion" type="number" class="form-control" name="punto_reposicion" disabled>
+                    <input type="text" class="form-control" name="telefono" required>
                 </div>
             </div>
             <div class="loginContainer_formularioContainer_buttons">
@@ -94,7 +53,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
         </form>
     </main>
 
-    <footer class="mt-5">
+    <footer>
         <p class="footer_derechos">©Derechos reservados Agustín Fernandez 2022-2023</p>
         <div class="footer_redes">
             <a href="#"><i class="fa-brands fa-instagram"></i></a>
@@ -113,13 +72,17 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- JS -->
     <?php
-    if (isset($_SESSION['estado_registro']) && $_SESSION['estado_registro'] == "REGISTRO_PREMIO_OK") {
+    if (isset($_SESSION['estado_registro']) && $_SESSION['estado_registro'] == "REGISTRO_COMERCIO_OK") {
         $_SESSION['estado_registro'] = null;
-        echo "<script>toastr.success('Premio registrado correctamente')</script>";
+        echo "<script>toastr.success('Proveedor registrado correctamente')</script>";
     }
-    if (isset($_SESSION['estado_registro']) && $_SESSION['estado_registro'] == "REGISTRO_PREMIO_ERROR") {
+    if (isset($_SESSION['estado_registro']) && $_SESSION['estado_registro'] == "REGISTRO_COMERCIO_ERROR_RAZON_SOCIAL") {
         $_SESSION['estado_registro'] = null;
-        echo "<script>toastr.error('Error en la creación del premio','ERROR')</script>";
+        echo "<script>toastr.error('Razón social ya registrada','ERROR')</script>";
+    }
+    if (isset($_SESSION['estado_registro']) && $_SESSION['estado_registro'] == "REGISTRO_COMERCIO_ERROR") {
+        $_SESSION['estado_registro'] = null;
+        echo "<script>toastr.error('Error en el registro del proveedor','ERROR')</script>";
     }
     ?>
     <script src="js/control_checkbox_inputs_opcionales.js"></script>

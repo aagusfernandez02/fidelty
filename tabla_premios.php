@@ -31,16 +31,18 @@ if( !isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN' ){
     <a class="go_back" href="index_admin.php">
         <i class="fa-solid fa-backward"></i><div id="go_back_tooltip"> VOLVER</div>
     </a>
+    <h1 class="display-4 text-center mt-4 mb-4">Premios</h1>
     <main class="main_admin">
     <table class="tabla">
-        <caption>Premios</caption>
+        <caption></caption>
         <thead>
             <tr>
                 <th>Nombre</th>
                 <th>Descripcion</th>
-                <th>Stock</th>
                 <th>Saldo</th>
-                <th>Pto. reposicion</th>
+                <th>Stock</th>
+                <th>Pto. Repo.</th>
+                <th>Proveedor</th>
                 <th>Imagen</th>
                 <th>EDITAR</th>
                 <th>ELIMINAR</th>
@@ -56,9 +58,10 @@ if( !isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN' ){
                         <tr>
                             <td>".$row['nombre']."</td>
                             <td>".$row['descripcion']."</td>
-                            <td>".$row['stock']."</td>
                             <td>".$row['saldo']."</td>
+                            <td>".$row['stock']."</td>
                             <td>".$row['punto_reposicion']."</td>
+                            <td>".$row['proveedor']."</td>
                             <td><button type='button' class='btn btn-secondary'><a href='".$row['img']."' target='_blank'>VER</a></button></td>
                             <td><button type='button' class='btn btn-success'><a href='edit_premio.php?id-premio=".$row['id']."'>EDITAR</a></button></td>
                             <td><button type='button' class='btn btn-danger'><a href='php/deletePremio.php?id-premio=".$row['id']."'>ELIMINAR</a></button></td>

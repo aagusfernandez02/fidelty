@@ -1,4 +1,3 @@
-   
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -13,21 +12,22 @@ $descripcion = $_POST['descripcion'];
 $nombre = $_POST['nombre'];
 $saldo = $_POST['saldo'];
 $img = $_POST['img'];
+$proveedor = $_POST['proveedor'];
 
 
 include("conexion.php");
-$consulta = mysqli_query($conexion, "INSERT INTO premios(id, saldo, img, nombre, descripcion) VALUES(NULL, $saldo, '$img', '$nombre', '$descripcion');");
+$consulta = mysqli_query($conexion, "INSERT INTO premios(id, proveedor, saldo, img, nombre, descripcion) VALUES(NULL, '$proveedor', $saldo, '$img', '$nombre', '$descripcion');");
 if (!isset($_POST['ingreso_con_punto_reposicion']) and !isset($_POST['ingreso_con_stock'])) {
 } else if (!isset($_POST['ingreso_con_punto_reposicion']) and isset($_POST['ingreso_con_stock'])) {
     $stock = $_POST['stock'];
-    $consulta = mysqli_query($conexion, "INSERT INTO premios(id, saldo, stock, img, nombre, descripcion) VALUES(NULL, $saldo, $stock, '$img', '$nombre', '$descripcion');");
+    $consulta = mysqli_query($conexion, "INSERT INTO premios(id, proveedor, saldo, stock, img, nombre, descripcion) VALUES(NULL, '$proveedor', $saldo, $stock, '$img', '$nombre', '$descripcion');");
 } else if (!isset($_POST['ingreso_con_stock']) and isset($_POST['ingreso_con_punto_reposicion'])) {
     $punto_reposicion = $_POST['punto_reposicion'];
-    $consulta = mysqli_query($conexion, "INSERT INTO premios(id, saldo, punto_reposicion, img, nombre, descripcion) VALUES(NULL, $saldo, $punto_reposicion, '$img', '$nombre', '$descripcion');");
+    $consulta = mysqli_query($conexion, "INSERT INTO premios(id, proveedor, saldo, punto_reposicion, img, nombre, descripcion) VALUES(NULL, '$proveedor', $saldo, $punto_reposicion, '$img', '$nombre', '$descripcion');");
 } else {
     $stock = $_POST['stock'];
     $punto_reposicion = $_POST['punto_reposicion'];
-    $consulta = mysqli_query($conexion, "INSERT INTO premios(id, saldo, stock, punto_reposicion, img, nombre, descripcion) VALUES(NULL, $saldo, $stock, $punto_reposicion, '$img', '$nombre', '$descripcion');");
+    $consulta = mysqli_query($conexion, "INSERT INTO premios(id, proveedor, saldo, stock, punto_reposicion, img, nombre, descripcion) VALUES(NULL, '$proveedor', $saldo, $stock, $punto_reposicion, '$img', '$nombre', '$descripcion');");
 }
 
 // NOTIFICA A LOS SOCIOS DEL INGRESO DEL NUEVO PREMIO

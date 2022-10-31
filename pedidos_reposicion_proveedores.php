@@ -31,31 +31,22 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
         <i class="fa-solid fa-backward"></i>
         <div id="go_back_tooltip"> VOLVER</div>
     </a>
-    <h1 class="display-4 text-center mt-4 mb-4">Canjes socios</h1>
+    <h1 class="display-4 text-center mt-4 mb-4">Pedidos de reposición</h1>
     <main>
-        <form class="searchbar_container" method="get" action="canjes_socios.php">
-            <div class="searchbar">
-                <input name="socio" type="text" class="form-control" placeholder="DNI socio">
-                <button type="submit" class="btn btn-light"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
-        </form>
-        <?php  if(isset($_GET['socio']) AND $_GET['socio']!="") echo "<h6>DNI: ".$_GET['socio']."</h6>" ?>
         <table class="tabla mt-4">
                 <?php
                 include("php/conexion.php");
-                if (isset($_GET['socio']) and $_GET['socio'] != '') {
-                    $result = mysqli_query($conexion, "SELECT c.fecha, c.dni_socio, p.nombre FROM premios p, canjes c WHERE p.id = c.id_premio AND c.dni_socio ='" . $_GET['socio'] . "' ORDER BY c.fecha DESC");
-                } else {
-                    $result = mysqli_query($conexion, "SELECT c.fecha, c.dni_socio, p.nombre FROM premios p, canjes c WHERE p.id = c.id_premio ORDER BY c.dni_socio");
-                }
+
+                $result = mysqli_query($conexion,"SELECT DISTINCT proveedor FROM premios WHERE premios.punto_reposicion IS NOT NULL AND premios.stock < premios.punto_reposicion");
+                
                 if( mysqli_num_rows($result)>0 ){
                     echo "
-                    <caption></caption>
+                    <button type='button' class='btn btn-success'><a href='php/pdfPedidosReposicion.php' target='_blank'>VER TODOS</a></button>
+                    <caption>Proveedores con faltante</caption>
                         <thead>
                             <tr>
-                                <th>Fecha canje</th>
-                                <th>DNI socio</th>
-                                <th>Premio</th>
+                                <th>Proveedor</th>
+                                <th>Generar pedido</th>
                             </tr>
                         </thead>
                         <tbody>";
@@ -63,9 +54,8 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
                     while ($row) {
                         echo "
                             <tr>
-                                <td>" . $row['fecha'] . "</td>
-                                <td>" . $row['dni_socio'] . "</td>
-                                <td>" . $row['nombre'] . "</td>
+                                <td>" . $row['proveedor'] . "</td>
+                                <td><button type='button' class='btn btn-light'><a href='php/pdfPedidosReposicion.php?proveedor=".$row['proveedor']."' target='_blank'>VER Y ENVIAR</a></button></td>
                             </tr>
                         ";
                         $row = mysqli_fetch_assoc($result);

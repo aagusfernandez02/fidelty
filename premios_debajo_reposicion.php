@@ -20,6 +20,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- CSS -->
     <link rel="stylesheet" href="css/styles_canjes.css">
+    <link rel="stylesheet" href="css/styles_tabla.css">
 </head>
 
 <body>
@@ -31,53 +32,43 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
         <i class="fa-solid fa-backward"></i>
         <div id="go_back_tooltip"> VOLVER</div>
     </a>
-    <h1 class="display-4 text-center mt-4 mb-4">Canjes socios</h1>
-    <main>
-        <form class="searchbar_container" method="get" action="canjes_socios.php">
-            <div class="searchbar">
-                <input name="socio" type="text" class="form-control" placeholder="DNI socio">
-                <button type="submit" class="btn btn-light"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
-        </form>
-        <?php  if(isset($_GET['socio']) AND $_GET['socio']!="") echo "<h6>DNI: ".$_GET['socio']."</h6>" ?>
-        <table class="tabla mt-4">
+    <h1 class="display-4 text-center mt-4 mb-4">Premios debajo del punto de reposición</h1>
+    <main class="p-3">
+
+        <table class="tabla">
+            <caption>Premios con faltante</caption>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Stock</th>
+                    <th>Pto. reposicion</th>
+                    <th>Faltante</th>
+                    <th>Proveedor</th>
+                </tr>
+            </thead>
+            <tbody>
                 <?php
                 include("php/conexion.php");
-                if (isset($_GET['socio']) and $_GET['socio'] != '') {
-                    $result = mysqli_query($conexion, "SELECT c.fecha, c.dni_socio, p.nombre FROM premios p, canjes c WHERE p.id = c.id_premio AND c.dni_socio ='" . $_GET['socio'] . "' ORDER BY c.fecha DESC");
-                } else {
-                    $result = mysqli_query($conexion, "SELECT c.fecha, c.dni_socio, p.nombre FROM premios p, canjes c WHERE p.id = c.id_premio ORDER BY c.dni_socio");
-                }
-                if( mysqli_num_rows($result)>0 ){
+                $result = mysqli_query($conexion, "SELECT * FROM premios WHERE premios.punto_reposicion IS NOT NULL AND premios.stock < premios.punto_reposicion ORDER BY nombre;");
+                while ($row = mysqli_fetch_assoc($result)) {
                     echo "
-                    <caption></caption>
-                        <thead>
-                            <tr>
-                                <th>Fecha canje</th>
-                                <th>DNI socio</th>
-                                <th>Premio</th>
-                            </tr>
-                        </thead>
-                        <tbody>";
-                    $row = mysqli_fetch_assoc($result);
-                    while ($row) {
-                        echo "
-                            <tr>
-                                <td>" . $row['fecha'] . "</td>
-                                <td>" . $row['dni_socio'] . "</td>
-                                <td>" . $row['nombre'] . "</td>
-                            </tr>
+                        <tr>
+                            <td>" . $row['nombre'] . "</td>
+                            <td>" . $row['descripcion'] . "</td>
+                            <td>" . $row['stock'] . "</td>
+                            <td>" . $row['punto_reposicion'] . "</td>
+                            <td>" . $row['punto_reposicion'] - $row['stock'] . "</td>
+                            <td><a href='premios_'>" . $row['proveedor'] . "</a></td>
+                        </tr>
                         ";
-                        $row = mysqli_fetch_assoc($result);
                     }
-                    echo "</tbody>";
-                } else {
-                    echo "No hay premios registrados";
-                }
+                    echo "<button type='button' class='btn btn-light mb-4'><a href='pedidos_reposicion_proveedores.php'>GENERAR PEDIDOS</a></button>";
+
                 ?>
+            </tbody>
         </table>
     </main>
-
     <footer>
         <p class="footer_derechos">©Derechos reservados Agustín Fernandez 2022-2023</p>
         <div class="footer_redes">
