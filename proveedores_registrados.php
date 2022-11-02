@@ -20,7 +20,6 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- CSS -->
     <link rel="stylesheet" href="css/styles_canjes.css">
-    <link rel="stylesheet" href="css/styles_tabla.css">
 </head>
 
 <body>
@@ -32,43 +31,53 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
         <i class="fa-solid fa-backward"></i>
         <div id="go_back_tooltip"> VOLVER</div>
     </a>
-    <h1 class="display-4 text-center mt-4 mb-4">Premios debajo del punto de reposición</h1>
-    <main class="p-3">
-
-        <table class="tabla">
-            <caption>Premios con faltante</caption>
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Descripcion</th>
-                    <th>Stock</th>
-                    <th>Pto. reposicion</th>
-                    <th>Faltante</th>
-                    <th>Proveedor</th>
-                </tr>
-            </thead>
-            <tbody>
+    <h1 class="display-4 text-center mt-4 mb-4">Proveedores registrados</h1>
+    <main>
+        <form class="searchbar_container" method="get" action="proveedores_registrados.php">
+            <div class="searchbar">
+                <input name="proveedor" type="text" class="form-control" placeholder="Razon social proveedor">
+                <button type="submit" class="btn btn-light"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </form>
+        <?php  if(isset($_GET['proveedor']) AND $_GET['proveedor']!="") echo "<h6>Razon social: ".$_GET['proveedor']."</h6>" ?>
+        <table class="tabla mt-4">
                 <?php
                 include("php/conexion.php");
-                $result = mysqli_query($conexion, "SELECT * FROM premios WHERE premios.punto_reposicion IS NOT NULL AND premios.stock < premios.punto_reposicion ORDER BY nombre;");
-                while ($row = mysqli_fetch_assoc($result)) {
+                if (isset($_GET['proveedor']) and $_GET['proveedor'] != '') {
+                    $result = mysqli_query($conexion, "SELECT * FROM proveedores WHERE razon_social LIKE '%".$_GET['proveedor']."%' ORDER BY razon_social");
+                } else {
+                    $result = mysqli_query($conexion, "SELECT * FROM proveedores ORDER BY razon_social");
+                }
+                if( mysqli_num_rows($result)>0 ){
                     echo "
-                        <tr>
-                            <td>" . $row['nombre'] . "</td>
-                            <td>" . $row['descripcion'] . "</td>
-                            <td>" . $row['stock'] . "</td>
-                            <td>" . $row['punto_reposicion'] . "</td>
-                            <td>" . $row['punto_reposicion'] - $row['stock'] . "</td>
-                            <td><a href='premios_'>" . $row['proveedor'] . "</a></td>
-                        </tr>
+                    <caption></caption>
+                        <thead>
+                            <tr>
+                                <th>Razon social</th>
+                                <th>Telefono</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>";
+                    $row = mysqli_fetch_assoc($result);
+                    while ($row) {
+                        echo "
+                            <tr>
+                                <td>" . $row['razon_social'] . "</td>
+                                <td>" . $row['telefono'] . "</td>
+                                <td>" . $row['email'] . "</td>
+                            </tr>
                         ";
+                        $row = mysqli_fetch_assoc($result);
                     }
-                    echo "<button type='button' class='btn btn-light mb-4'><a href='pedidos_reposicion_proveedores.php'>PEDIDOS DE REPOSICIÓN</a></button>";
-
+                    echo "</tbody>";
+                } else {
+                    echo "No hay proveedores registrados";
+                }
                 ?>
-            </tbody>
         </table>
     </main>
+
     <footer>
         <p class="footer_derechos">©Derechos reservados Agustín Fernandez 2022-2023</p>
         <div class="footer_redes">
@@ -87,24 +96,6 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <!-- TOASTS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <?php
-    if (isset($_SESSION['estado_delete']) && $_SESSION['estado_delete'] == "DELETE_PREMIO_OK") {
-        $_SESSION['estado_delete'] = null;
-        echo "<script>toastr.success('Premio eliminado correctamente')</script>";
-    }
-    if (isset($_SESSION['estado_delete']) && $_SESSION['estado_delete'] == "DELETE_PREMIO_ERROR") {
-        $_SESSION['estado_delete'] = null;
-        echo "<script>toastr.error('Error en la eliminación del premio','ERROR')</script>";
-    }
-    if (isset($_SESSION['estado_update']) && $_SESSION['estado_update'] == "UPDATE_PREMIO_OK") {
-        $_SESSION['estado_update'] = null;
-        echo "<script>toastr.success('Premio actualizado correctamente')</script>";
-    }
-    if (isset($_SESSION['estado_update']) && $_SESSION['estado_update'] == "UPDATE_PREMIO_ERROR") {
-        $_SESSION['estado_update'] = null;
-        echo "<script>toastr.error('Error en la actualización del premio','ERROR')</script>";
-    }
-    ?>
 </body>
 
 </html>

@@ -16,8 +16,8 @@ $proveedor = $_POST['proveedor'];
 
 
 include("conexion.php");
-$consulta = mysqli_query($conexion, "INSERT INTO premios(id, proveedor, saldo, img, nombre, descripcion) VALUES(NULL, '$proveedor', $saldo, '$img', '$nombre', '$descripcion');");
 if (!isset($_POST['ingreso_con_punto_reposicion']) and !isset($_POST['ingreso_con_stock'])) {
+    $consulta = mysqli_query($conexion, "INSERT INTO premios(id, proveedor, saldo, img, nombre, descripcion) VALUES(NULL, '$proveedor', $saldo, '$img', '$nombre', '$descripcion');");
 } else if (!isset($_POST['ingreso_con_punto_reposicion']) and isset($_POST['ingreso_con_stock'])) {
     $stock = $_POST['stock'];
     $consulta = mysqli_query($conexion, "INSERT INTO premios(id, proveedor, saldo, stock, img, nombre, descripcion) VALUES(NULL, '$proveedor', $saldo, $stock, '$img', '$nombre', '$descripcion');");

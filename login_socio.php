@@ -58,8 +58,8 @@
     
     <!-- JS -->
     <?php 
-        if( isset( $_SESSION['estado'] ) && $_SESSION['estado']=="REGISTRO_OK" ) {
-            $_SESSION['estado'] = null;
+        if( isset( $_SESSION['estado_registro'] ) && $_SESSION['estado_registro']=="REGISTRO_OK" ) {
+            $_SESSION['estado_registro'] = null;
             echo "<script>toastr.success('Usuario registrado correctamente')</script>";
         }
         if( isset( $_SESSION['estado'] ) && $_SESSION['estado']=="SOCIO_ERROR" ) {

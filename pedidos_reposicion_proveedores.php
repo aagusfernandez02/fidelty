@@ -27,7 +27,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
         <h2 class="display-5 text-center"><a href="index_admin.php">Fidelty</a></h2>
         <a href="php/funciones.php?session_destroy=true"><i class="fa-solid fa-right-from-bracket"></i></a>
     </header>
-    <a class="go_back" href="index_admin.php">
+    <a class="go_back" href="premios_debajo_reposicion.php">
         <i class="fa-solid fa-backward"></i>
         <div id="go_back_tooltip"> VOLVER</div>
     </a>
@@ -41,21 +41,26 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
                 
                 if( mysqli_num_rows($result)>0 ){
                     echo "
-                    <button type='button' class='btn btn-success'><a href='php/pdfPedidosReposicion.php' target='_blank'>VER TODOS</a></button>
+                    <div class='d-flex'>
+                        <button type='button' class='btn btn-success me-3'><a href='php/pdfPedidosReposicion.php' target='_blank'>VER TODOS</a></button>
+                        <button type='button' class='btn btn-success'><a href='php/pdfPedidosReposicion.php?send_email=true' target='_blank'>GENERAR Y ENVIAR TODOS</a></button>
+                    </div>
                     <caption>Proveedores con faltante</caption>
-                        <thead>
-                            <tr>
-                                <th>Proveedor</th>
-                                <th>Generar pedido</th>
-                            </tr>
-                        </thead>
-                        <tbody>";
+                    <thead>
+                        <tr>
+                            <th>Proveedor</th>
+                            <th>Ver pedido</th>
+                            <th>Generar y enviar pedido</th>
+                        </tr>
+                    </thead>
+                    <tbody>";
                     $row = mysqli_fetch_assoc($result);
                     while ($row) {
                         echo "
                             <tr>
                                 <td>" . $row['proveedor'] . "</td>
-                                <td><button type='button' class='btn btn-light'><a href='php/pdfPedidosReposicion.php?proveedor=".$row['proveedor']."' target='_blank'>VER Y ENVIAR</a></button></td>
+                                <td><button type='button' class='btn btn-light'><a href='php/pdfPedidosReposicion.php?send_email=false&proveedor=".$row['proveedor']."' target='_blank'>VER</a></button></td>
+                                <td><button type='button' class='btn btn-light'><a href='php/pdfPedidosReposicion.php?send_email=true&proveedor=".$row['proveedor']."' target='_blank'>GENERAR Y ENVIAR</a></button></td>
                             </tr>
                         ";
                         $row = mysqli_fetch_assoc($result);

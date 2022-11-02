@@ -17,11 +17,11 @@
     $resultado=mysqli_num_rows($consulta);
 
     if( $resultado!=0 ){
-        $_SESSION['estado'] = "REGISTRO_ERROR";
+        $_SESSION['estado_registro'] = "REGISTRO_ERROR";
         header("Location:../register_socio.php");
         // echo "Usuario registrado";
     } else {
-        $_SESSION['estado'] = "REGISTRO_OK";
+        $_SESSION['estado_registro'] = "REGISTRO_OK";
         $query = mysqli_query($conexion, "INSERT INTO socios VALUES('$dni','$nombre','$apellido','$fecha_nacimiento','$email','$password',0);");
         header("Location:../login_socio.php");
         // echo "No es un usuario registrado";

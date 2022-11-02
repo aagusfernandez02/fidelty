@@ -108,6 +108,17 @@ if( isset($_GET['id-premio']) and $_GET['id-premio']!="" ){
                     ?>
                 </div>
             </div>
+            <div class="row mb-3">
+                <label for="proveedor" class="col-sm-2 col-form-label">Proveedor</label>
+                <div class="col-sm-10">
+                    <?php 
+                    if( isset($_GET['id-premio']) and $_GET['id-premio']!="")
+                        echo '<input type="text" class="form-control" name="proveedor" value="'.$premio_editar['proveedor'].'">';
+                    else 
+                        echo '<input type="text" class="form-control" name="proveedor">';
+                    ?>
+                </div>
+            </div>
             <div class="loginContainer_formularioContainer_buttons">
                 <button type="reset" class="btn btn-danger">LIMPIAR</button>
                 <button type="submit" class="btn btn-success">EDITAR</button>
@@ -115,7 +126,7 @@ if( isset($_GET['id-premio']) and $_GET['id-premio']!="" ){
         </form>
     </main>
     
-    <footer>
+    <footer class="mt-3">
         <p class="footer_derechos">©Derechos reservados Agustín Fernandez 2022-2023</p>
         <div class="footer_redes">
             <a href="#"><i class="fa-brands fa-instagram"></i></a>

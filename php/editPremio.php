@@ -27,6 +27,10 @@
     $stock = $_POST['stock'];
     $UPDATE_QUERY = $UPDATE_QUERY."premios.stock = '$stock',";
    }
+   if( isset($_POST['proveedor']) and $_POST['proveedor']!=""  ){
+    $proveedor = $_POST['proveedor'];
+    $UPDATE_QUERY = $UPDATE_QUERY."premios.proveedor = '$proveedor',";
+   }
    echo $UPDATE_QUERY;
    if($UPDATE_QUERY != 'UPDATE premios SET '){
         $UPDATE_QUERY = rtrim($UPDATE_QUERY, ',');

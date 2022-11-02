@@ -46,6 +46,12 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
                     <input type="text" class="form-control" name="telefono" required>
                 </div>
             </div>
+            <div class="row mb-3">
+                <label for="email" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="email" required>
+                </div>
+            </div>
             <div class="loginContainer_formularioContainer_buttons">
                 <button type="reset" class="btn btn-danger">LIMPIAR</button>
                 <button type="submit" class="btn btn-success">REGISTRAR</button>
@@ -72,15 +78,15 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- JS -->
     <?php
-    if (isset($_SESSION['estado_registro']) && $_SESSION['estado_registro'] == "REGISTRO_COMERCIO_OK") {
+    if (isset($_SESSION['estado_registro']) && $_SESSION['estado_registro'] == "REGISTRO_PROVEEDOR_OK") {
         $_SESSION['estado_registro'] = null;
         echo "<script>toastr.success('Proveedor registrado correctamente')</script>";
     }
-    if (isset($_SESSION['estado_registro']) && $_SESSION['estado_registro'] == "REGISTRO_COMERCIO_ERROR_RAZON_SOCIAL") {
+    if (isset($_SESSION['estado_registro']) && $_SESSION['estado_registro'] == "REGISTRO_PROVEEDOR_ERROR_RAZON_SOCIAL") {
         $_SESSION['estado_registro'] = null;
         echo "<script>toastr.error('Razón social ya registrada','ERROR')</script>";
     }
-    if (isset($_SESSION['estado_registro']) && $_SESSION['estado_registro'] == "REGISTRO_COMERCIO_ERROR") {
+    if (isset($_SESSION['estado_registro']) && $_SESSION['estado_registro'] == "REGISTRO_PROVEEDOR_ERROR") {
         $_SESSION['estado_registro'] = null;
         echo "<script>toastr.error('Error en el registro del proveedor','ERROR')</script>";
     }

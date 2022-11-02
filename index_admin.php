@@ -31,13 +31,15 @@ if( !isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN' ){
             <h1 class="display-6 text-center">OPCIONES DE ADMINISTRADOR</h1>
             <ul>
                 <li><a href="create_premio.php" class="lead">Crear premio</a></li>
-                <li><a href="create_proveedor.php" class="lead">Crear proveedor</a></li>
+                <li><a href="create_proveedor.php" class="lead">Registrar proveedor</a></li>
                 <li><a href="tabla_premios.php" class="lead">Ver/editar/eliminar premios</a></li>
                 <li><a href="register_comercio.php" class="lead">Registrar comercio</a></li>
                 <li><a href="delete_comercio.php" class="lead">Dar de baja comercio</a></li>
                 <li><a href="canjes_socios.php" class="lead">Canjes socios</a></li>
                 <li><a href="premios_debajo_reposicion.php" class="lead">Premios debajo del punto de reposición</a></li>
                 <li><a href="actividad_red.php" class="lead">Actividad de la red</a></li>
+                <li><a href="proveedores_registrados.php" class="lead">Proveedores registrados</a></li>
+                <li><a href="registrar_remito.php" class="lead">Registrar remitos</a></li>
             </ul>
         </div>
     </main>
