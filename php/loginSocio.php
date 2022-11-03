@@ -19,7 +19,7 @@
         $_SESSION['password'] = $password;
         header("Location: ../index_socio.php");
     } else {
-        $_SESSION['estado'] = "SOCIO_ERROR";
+        $_SESSION['estado_login'] = "SOCIO_ERROR";
         header("Location: ../login_socio.php");
     }
 ?>

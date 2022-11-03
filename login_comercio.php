@@ -59,8 +59,8 @@
     
     <!-- JS -->
     <?php 
-        if( isset( $_SESSION['estado'] ) && $_SESSION['estado']=="COMERCIO_ERROR" ) {
-            $_SESSION['estado'] = null;
+        if( isset( $_SESSION['estado_login'] ) && $_SESSION['estado_login']=="COMERCIO_ERROR" ) {
+            $_SESSION['estado_login'] = null;
             echo "<script>toastr.error('Credenciales incorrectas','ERROR')</script>";
         }
     ?>

@@ -51,7 +51,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- JS -->
     <?php
-    if (isset($_SESSION['estado']) && $_SESSION['estado'] == "ADMIN_ERROR") {
+    if (isset($_SESSION['estado_admin']) && $_SESSION['estado_admin'] == "ADMIN_ERROR") {
         $_SESSION['estado'] = null;
         echo "<script>toastr.error('Credenciales incorrectas','ERROR')</script>";
     }

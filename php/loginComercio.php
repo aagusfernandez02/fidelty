@@ -18,7 +18,7 @@
         $_SESSION['estado']='COMERCIO';
         header("Location: ../index_comercio.php");
     } else {
-        $_SESSION['estado'] = "COMERCIO_ERROR";
+        $_SESSION['estado_login'] = "COMERCIO_ERROR";
         header("Location: ../login_comercio.php");
     }
 ?>

@@ -13,7 +13,7 @@
 	    $_SESSION['estado']="ADMIN";
         header("Location:../index_admin.php");
     } else {
-        $_SESSION['estado']="ADMIN_ERROR";
+        $_SESSION['estado_admin']="ADMIN_ERROR";
         header("Location:../login_admin.php");
     }
 
