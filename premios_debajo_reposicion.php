@@ -59,7 +59,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
                             <td>" . $row['stock'] . "</td>
                             <td>" . $row['punto_reposicion'] . "</td>
                             <td>" . $row['punto_reposicion'] - $row['stock'] . "</td>
-                            <td><a href='premios_'>" . $row['proveedor'] . "</a></td>
+                            <td>" . $row['proveedor'] . "</td>
                         </tr>
                         ";
                     }
