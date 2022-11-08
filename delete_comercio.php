@@ -5,6 +5,8 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
     header("Location: index.php");
 }
 
+include('php/conexion.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,21 +30,31 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
         <a href="./php/funciones.php?session_destroy=true"><i class="fa-solid fa-right-from-bracket"></i></a>
     </header>
     <a class="go_back" href="./index_admin.php">
-        <i class="fa-solid fa-backward"></i><div id="go_back_tooltip"> VOLVER</div>
+        <i class="fa-solid fa-backward"></i>
+        <div id="go_back_tooltip"> VOLVER</div>
     </a>
     <main class="main_register_comercio">
         <img src="https://webstockreview.net/images/classroom-clipart-garbage-can-7.png" alt="imagen representativa de un comercio" class="imagen_aux">
         <form class="regiter_comercio_form" method="post" action="php/deleteComercio.php">
-            <h1 class="display-6 mb-3">DAR DE BAJA COMERCIO</h1>
+            <h1 class="display-6 mb-3">ELIMINAR COMERCIO</h1>
             <div class="row mb-3">
-                <label for="cuit" class="col-sm-2 col-form-label">Cuit</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="cuit" placeholder="30-71031609-7" required>
-                </div>
+                <label for="proveedor" class="col-form-label">Comercio</label>
+                <?php
+                $comercios = mysqli_query($conexion, "SELECT * FROM comercios");
+                if (mysqli_num_rows($comercios) > 0) {
+                    echo '<select class="form-select" name="cuit">';
+                    $row = mysqli_fetch_assoc($comercios);
+                    while ($row) {
+                        echo '<option value="' . $row['cuit'] . '">' . $row['cuit'] . ' ('.$row['direccion'].')</option>';
+                        $row = mysqli_fetch_assoc($comercios);
+                    }
+                    echo '</select>';
+                } else echo 'No hay comercios registrados';
+                ?>
             </div>
             <div class="loginContainer_formularioContainer_buttons">
-                <button type="reset" class="btn btn-danger">LIMPIAR</button>
-                <button type="submit" class="btn btn-success">ELIMINAR</button>
+                <!-- <button type="reset" class="btn btn-danger">LIMPIAR</button> -->
+                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estas seguro que desea eliminar el comercio?');">ELIMINAR</button>
             </div>
         </form>
     </main>

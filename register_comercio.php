@@ -37,7 +37,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
             <div class="row mb-3">
                 <label for="cuit" class="col-sm-2 col-form-label">Cuit</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="cuit" placeholder="30-71031609-7" required>
+                    <input type="text" class="form-control" name="cuit" placeholder="30-71031609-7" minlength="13" maxlength="13" required>
                 </div>
             </div>
             <div class="row mb-3">
@@ -49,7 +49,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
             <div class="row mb-3">
                 <label for="email" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="email" placeholder="emailContacto@gmail.com" required>
+                    <input type="email" class="form-control" name="email" placeholder="emailContacto@gmail.com" required>
                 </div>
             </div>
             <div class="row mb-3">

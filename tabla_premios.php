@@ -61,10 +61,10 @@ if( !isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN' ){
                             <td>".$row['saldo']."</td>
                             <td>".$row['stock']."</td>
                             <td>".$row['punto_reposicion']."</td>
-                            <td>".$row['proveedor']."</td>
+                            <td>".$row['proveedor']."</td>                            
                             <td><button type='button' class='btn btn-secondary'><a href='".$row['img']."' target='_blank'>VER</a></button></td>
                             <td><button type='button' class='btn btn-success'><a href='edit_premio.php?id-premio=".$row['id']."'>EDITAR</a></button></td>
-                            <td><button type='button' class='btn btn-danger'><a href='php/deletePremio.php?id-premio=".$row['id']."'>ELIMINAR</a></button></td>
+                            <td>"?><button type='button' class='btn btn-danger' onclick='return confirm("¿Estas seguro que desea eliminar el premio?");'><?php echo "<a href='php/deletePremio.php?id-premio=".$row['id']."'>ELIMINAR</a></button></td>
                         </tr>
                     ";
                 }

@@ -29,17 +29,21 @@ if( !isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN' ){
         <img class="imagen_aux" src="img/admin.png" alt="Imagen representativa de un administrador">
         <div class="admin-options-container">
             <h1 class="display-6 text-center">OPCIONES DE ADMINISTRADOR</h1>
-            <ul>
-                <li><a href="create_premio.php" class="lead">Crear premio</a></li>
-                <li><a href="create_proveedor.php" class="lead">Registrar proveedor</a></li>
-                <li><a href="tabla_premios.php" class="lead">Ver/editar/eliminar premios</a></li>
-                <li><a href="register_comercio.php" class="lead">Registrar comercio</a></li>
-                <li><a href="delete_comercio.php" class="lead">Dar de baja comercio</a></li>
-                <li><a href="canjes_socios.php" class="lead">Canjes socios</a></li>
-                <li><a href="premios_debajo_reposicion.php" class="lead">Premios debajo del punto de reposición</a></li>
-                <li><a href="actividad_red.php" class="lead">Actividad de la red</a></li>
-                <li><a href="proveedores_registrados.php" class="lead">Proveedores registrados</a></li>
-                <li><a href="registrar_remito.php" class="lead">Registrar remitos</a></li>
+            <ul style="list-style:none;">
+                <li class="fw-bold lead">- Premios</li>
+                <li><a href="create_premio.php" class="lead">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Crear premio</a></li>
+                <li><a href="tabla_premios.php" class="lead">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ver/editar/eliminar premios</a></li>
+                <li class="fw-bold lead">- Proveedores</li>
+                <li><a href="proveedores_registrados.php" class="lead">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Proveedores registrados</a></li>
+                <li><a href="create_proveedor.php" class="lead">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Registrar proveedor</a></li>
+                <li><a href="delete_proveedor.php" class="lead">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Eliminar proveedor</a></li>
+                <li class="fw-bold lead">- Comercios</li>
+                <li><a href="register_comercio.php" class="lead">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Registrar comercio</a></li>
+                <li><a href="delete_comercio.php" class="lead">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Eliminar comercio</a></li>
+                <li><a href="actividad_red.php" class="lead">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Actividad de la red</a></li>
+                <li class="fw-bold lead"><a href="canjes_socios.php">- Canjes socios</a></li>
+                <li class="fw-bold lead"><a href="premios_debajo_reposicion.php">- Premios debajo del punto de reposición</a></li>
+                <li class="fw-bold lead"><a href="registrar_remito.php">- Registrar remitos</a></li>
             </ul>
         </div>
     </main>

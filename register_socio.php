@@ -34,7 +34,7 @@
             </div>
             <div class="input-group input-group-sm mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-sm">DNI</span>
-                <input required type="text" class="form-control" name="dni" maxlength="8">
+                <input required type="text" class="form-control" name="dni" maxlength="8" minlength="8">
             </div>
             <div class="input-group input-group-sm mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-sm">Email</span>

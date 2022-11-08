@@ -49,7 +49,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] != 'ADMIN') {
             <div class="row mb-3">
                 <label for="email" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="email" required>
+                    <input type="email" class="form-control" name="email" required>
                 </div>
             </div>
             <div class="loginContainer_formularioContainer_buttons">

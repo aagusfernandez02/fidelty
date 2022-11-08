@@ -21,6 +21,7 @@
 </head>
 
 <body>
+    <a href="https://drive.google.com/file/d/1LxB8K-3wH8jf4GG1kkzoCThZN7a_LQGP/view" target="_blank">&nbsp;<i class="fa-regular fa-circle-question"></i>&nbsp;Información</a>
     <h1 class="display-4 text-center mt-4 mb-4">Bienvenido a Fidelty!</h1>
     <div class="loginContainer">
         <!-- Solapas -->
