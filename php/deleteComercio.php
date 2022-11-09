@@ -12,10 +12,10 @@
     if( $resultado!=0 ){
         $_SESSION['estado_delete'] = "DELETE_COMERCIO_OK";
         $consulta=mysqli_query($conexion, "DELETE FROM comercios WHERE cuit='$cuit'");
-        header("Location:../delete_comercio<.php");
+        header("Location:../delete_comercio.php");
     } else {
         $_SESSION['estado_delete'] = "DELETE_COMERCIO_ERROR";
-        header("Location:../delete_comercio<.php");
+        header("Location:../delete_comercio.php");
     }
 ?>
 

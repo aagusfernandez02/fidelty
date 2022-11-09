@@ -1,0 +1,11 @@
+USUARIO ADMIN:
+Username --> admin
+Password --> admin
+
+SOCIO:
+DNI --> 44006022
+Password --> 44006022
+
+COMERCIO:
+CUIT --> 20-44006022-7
+Password --> 44006022

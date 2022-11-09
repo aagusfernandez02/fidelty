@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2022 a las 04:18:25
+-- Tiempo de generación: 09-11-2022 a las 12:48:38
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -20,6 +20,95 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `fidelty`
 --
+CREATE DATABASE IF NOT EXISTS `fidelty` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `fidelty`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `administradores`
+--
+
+CREATE TABLE `administradores` (
+  `id` int(4) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `administradores`
+--
+
+INSERT INTO `administradores` (`id`, `username`, `password`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `canjes`
+--
+
+CREATE TABLE `canjes` (
+  `id_canje` int(5) NOT NULL,
+  `dni_socio` int(8) NOT NULL,
+  `id_premio` int(5) NOT NULL,
+  `fecha` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `comercios`
+--
+
+CREATE TABLE `comercios` (
+  `id` int(5) NOT NULL,
+  `cuit` varchar(20) NOT NULL,
+  `direccion` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `comercios`
+--
+
+INSERT INTO `comercios` (`id`, `cuit`, `direccion`, `email`, `password`) VALUES
+(4, '20-44006022-7', 'Mariano Escalada 1500, Haedo, Buenos Aires', 'af.agusfernandez02@gmail.com', 'd006a21a31dcb74a9531c14adef78621'),
+(7, '20-44006021-7', 'Paris 532, Haedo, Buenos Aires', 'frh.utn@edu.gob.ar', 'd006a21a31dcb74a9531c14adef78621');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `compras`
+--
+
+CREATE TABLE `compras` (
+  `id_compra` int(5) NOT NULL,
+  `fecha` date NOT NULL,
+  `importe` int(10) NOT NULL,
+  `cuit_comercio` varchar(20) NOT NULL,
+  `dni_socio` int(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `compras`
+--
+
+INSERT INTO `compras` (`id_compra`, `fecha`, `importe`, `cuit_comercio`, `dni_socio`) VALUES
+(20, '2022-11-09', 50000, '20-44006022-7', 44006022);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pedidos_reposicion`
+--
+
+CREATE TABLE `pedidos_reposicion` (
+  `id_pedido` int(5) NOT NULL,
+  `fecha` date NOT NULL,
+  `id_proveedor` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -61,9 +150,126 @@ INSERT INTO `premios` (`id`, `saldo`, `stock`, `punto_reposicion`, `img`, `nombr
 (49, 100, 16, 25, 'https://tienda.pago24.com.ar/media/catalog/product/cache/8bba2abe6d282ec93669d82aeb928040/l/f/lf28.jpeg', 'Alfajor Pepitos triple x65g', 'Canjeable por un descuento del 100% en Alfajor Pepito triple x65g en Wabi. Aplicable en compras superiores a $700 de lunes a jueves.', 'Wabi'),
 (51, 10000, 5, NULL, 'https://media.tycsports.com/files/2022/11/07/502549/hasbulla-con-la-camiseta-de-boca_w416.webp', 'Entrada Show Hasbulla Gran Rex 8/11', 'Vale por entrada al show de Hasbulla en el Gran Rex el dia 8/11 en campo vip.', 'Rami');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `premios_en_pedidos_reposicion`
+--
+
+CREATE TABLE `premios_en_pedidos_reposicion` (
+  `id_pedido` int(5) NOT NULL,
+  `id_premio` int(5) NOT NULL,
+  `cantidad` int(10) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `premios_en_remitos`
+--
+
+CREATE TABLE `premios_en_remitos` (
+  `id_remito` int(5) NOT NULL,
+  `id_premio` int(5) NOT NULL,
+  `cantidad` int(10) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `proveedores`
+--
+
+CREATE TABLE `proveedores` (
+  `id_proveedor` int(5) NOT NULL,
+  `razon_social` varchar(100) NOT NULL,
+  `telefono` varchar(20) NOT NULL,
+  `email` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `proveedores`
+--
+
+INSERT INTO `proveedores` (`id_proveedor`, `razon_social`, `telefono`, `email`) VALUES
+(2, 'La Distribuidora SA', '1130840455', 'af.agusfernandez02@gmail.com'),
+(6, 'La Aldea', '1154905706', 'af.agusfernandez02@gmail.com'),
+(8, 'Rami', '1130840455', 'af.agusfernandez02@gmail.com'),
+(9, 'Fravega', '1130840455', 'af.agusfernandez02@gmail.com'),
+(10, 'Sport Club', '1130840455', 'af.agusfernandez02@gmail.com'),
+(12, 'Spotify LATAM', '1130840455', 'af.agusfernandez02@gmail.com'),
+(13, 'Wabi', '1130840455', 'af.agusfernandez02@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `remitos`
+--
+
+CREATE TABLE `remitos` (
+  `id_remito` int(5) NOT NULL,
+  `id_proveedor` int(5) NOT NULL,
+  `fecha` date NOT NULL,
+  `img` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `socios`
+--
+
+CREATE TABLE `socios` (
+  `dni` int(8) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `apellido` varchar(30) NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `saldo` int(10) DEFAULT 0 CHECK (`saldo` >= 0)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `socios`
+--
+
+INSERT INTO `socios` (`dni`, `nombre`, `apellido`, `fecha_nacimiento`, `email`, `password`, `saldo`) VALUES
+(44006022, 'Agustín', 'Fernandez', '2002-01-17', 'af.agusfernandez02@gmail.com', 'd006a21a31dcb74a9531c14adef78621', 12500);
+
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `administradores`
+--
+ALTER TABLE `administradores`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `canjes`
+--
+ALTER TABLE `canjes`
+  ADD PRIMARY KEY (`id_canje`);
+
+--
+-- Indices de la tabla `comercios`
+--
+ALTER TABLE `comercios`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `cuit` (`cuit`);
+
+--
+-- Indices de la tabla `compras`
+--
+ALTER TABLE `compras`
+  ADD PRIMARY KEY (`id_compra`);
+
+--
+-- Indices de la tabla `pedidos_reposicion`
+--
+ALTER TABLE `pedidos_reposicion`
+  ADD PRIMARY KEY (`id_pedido`);
 
 --
 -- Indices de la tabla `premios`
@@ -72,14 +278,87 @@ ALTER TABLE `premios`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `premios_en_pedidos_reposicion`
+--
+ALTER TABLE `premios_en_pedidos_reposicion`
+  ADD PRIMARY KEY (`id_pedido`,`id_premio`);
+
+--
+-- Indices de la tabla `premios_en_remitos`
+--
+ALTER TABLE `premios_en_remitos`
+  ADD PRIMARY KEY (`id_remito`,`id_premio`);
+
+--
+-- Indices de la tabla `proveedores`
+--
+ALTER TABLE `proveedores`
+  ADD PRIMARY KEY (`id_proveedor`),
+  ADD UNIQUE KEY `unica` (`razon_social`);
+
+--
+-- Indices de la tabla `remitos`
+--
+ALTER TABLE `remitos`
+  ADD PRIMARY KEY (`id_remito`);
+
+--
+-- Indices de la tabla `socios`
+--
+ALTER TABLE `socios`
+  ADD PRIMARY KEY (`dni`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `administradores`
+--
+ALTER TABLE `administradores`
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `canjes`
+--
+ALTER TABLE `canjes`
+  MODIFY `id_canje` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT de la tabla `comercios`
+--
+ALTER TABLE `comercios`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de la tabla `compras`
+--
+ALTER TABLE `compras`
+  MODIFY `id_compra` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT de la tabla `pedidos_reposicion`
+--
+ALTER TABLE `pedidos_reposicion`
+  MODIFY `id_pedido` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `premios`
 --
 ALTER TABLE `premios`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
+--
+-- AUTO_INCREMENT de la tabla `proveedores`
+--
+ALTER TABLE `proveedores`
+  MODIFY `id_proveedor` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT de la tabla `remitos`
+--
+ALTER TABLE `remitos`
+  MODIFY `id_remito` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
